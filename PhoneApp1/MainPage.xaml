@@ -1,0 +1,56 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="PhoneApp1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <!--<shell:ApplicationBarIconButton x:Name="" IconUri="/Assets/AppBar/check.png" Text="Sign In"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/cancel.png" Text="Sign Out"/>-->
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Sign In" Click="MenuItemSignIn_Click"/>
+                <shell:ApplicationBarMenuItem Text="Sign Out" Click="MenuItemSignOut_Click"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="Sample twitter app" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="main page" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <phone:WebBrowser Grid.Row="0" Margin="-6,3,0,1" Name="loginBrowserControl" Visibility="Collapsed"
+                              Navigated="loginBrowserControl_Navigated" Navigating="loginBrowserControl_Navigating"/>
+
+            <Grid x:Name="TweetPanel" Grid.Row="0" Visibility="Collapsed">
+                <TextBlock x:Name="txtUserName" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="26" FontFamily="Segoe WP Bold" Foreground="Red"/>
+            </Grid>
+        </Grid>
+    </Grid>
+
+    
+
+</phone:PhoneApplicationPage>
+    
