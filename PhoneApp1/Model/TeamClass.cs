@@ -64,5 +64,18 @@ namespace PhoneApp1.Model
             public string is_current_login { get; set; }
         }
 
+        //public class Roster 
+        //{
+        //    public string player_key { get; set; }
+        //    public string player_id { get; set; }
+        //    public string display_position { get; set; }
+        //    public string player_key { get; set; }
+        //    public string player_key { get; set; }
+        //    public string player_key { get; set; }
+
+
+
+        //}
+
     }
 }
