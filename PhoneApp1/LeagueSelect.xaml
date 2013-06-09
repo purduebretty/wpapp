@@ -27,8 +27,12 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector HorizontalAlignment="Left" Height="493" VerticalAlignment="Top" Width="456"/>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="14,10,10,-10">
+            <StackPanel>
+                <TextBlock>sup</TextBlock>
+            </StackPanel>
+            
+            
             <Button Content="Select" Click="Button_Click_1" HorizontalAlignment="Left" Height="75" Margin="289,522,0,0" VerticalAlignment="Top" Width="157"/>
 
         </Grid>

@@ -25,6 +25,7 @@ namespace PhoneApp1
         string tokenSecret = string.Empty;
         string accessToken = string.Empty;
         string accessTokenSecret = string.Empty;
+        string timestamp = string.Empty;
         
         // Constructor
         public MainPage()
@@ -44,8 +45,27 @@ namespace PhoneApp1
             accessToken = MainUtil.GetKeyValue<string>("AccessToken");
             accessTokenSecret = MainUtil.GetKeyValue<string>("AccessTokenSecret");
             
+
+            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            int seconds = (int)t.TotalSeconds;
+            var timestampcheck =  MainUtil.GetKeyValue<string>("Timestamp");
+            double duration = seconds - Convert.ToDouble(MainUtil.GetKeyValue<string>("Timestamp"));
+
+            if (duration > 3500)
+            {
+                var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
+                RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
+                RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
+               
+            }
+
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(accessTokenSecret))
+            {
                 return false;
+            }
+                //add refresh token
+          
+                //
             else
                 return true;
         }
@@ -147,10 +167,38 @@ namespace PhoneApp1
                 var parameters = MainUtil.GetQueryParameters(strResponse);
                 accessToken = parameters["oauth_token"];
                 accessTokenSecret = parameters["oauth_token_secret"];
-               
+                TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+                
                 MainUtil.SetKeyValue<string>("AccessToken", accessToken);
                 MainUtil.SetKeyValue<string>("AccessTokenSecret", accessTokenSecret);
+                MainUtil.SetKeyValue<string>("Timestamp", t.TotalSeconds.ToString());
         
+                userLoggedIn();
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.BeginInvoke(() =>
+                {
+                    MessageBox.Show(ex.Message);
+                });
+            }
+        }
+
+        void RefreshTokenQuery_QueryResponse(object sender, WebQueryResponseEventArgs e)
+        {
+            try
+            {
+                StreamReader reader = new StreamReader(e.Response);
+                string strResponse = reader.ReadToEnd();
+                var parameters = MainUtil.GetQueryParameters(strResponse);
+                accessToken = parameters["oauth_token"];
+                accessTokenSecret = parameters["oauth_token_secret"];
+                TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+
+                MainUtil.SetKeyValue<string>("AccessToken", accessToken);
+                MainUtil.SetKeyValue<string>("AccessTokenSecret", accessTokenSecret);
+                MainUtil.SetKeyValue<string>("Timestamp", t.TotalSeconds.ToString());
+
                 userLoggedIn();
             }
             catch (Exception ex)

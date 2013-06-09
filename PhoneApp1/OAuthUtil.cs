@@ -1,5 +1,6 @@
 ﻿using Hammock.Authentication.OAuth;
 using Hammock.Web;
+using PhoneApp1;
 using System.Net;
 public class OAuthUtil
 {
@@ -45,6 +46,32 @@ public class OAuthUtil
         //info.Signature = HttpUtility.UrlEncode(info.Signature);
         ////replace signature
         
+        var objOAuthWebQuery = new OAuthWebQuery(info, false);
+        objOAuthWebQuery.HasElevatedPermissions = true;
+        objOAuthWebQuery.SilverlightUserAgentHeader = "Hammock";
+        return objOAuthWebQuery;
+    }
+
+    internal static OAuthWebQuery RefreshAccessTokenQuery()
+    {
+        var oauth = new OAuthWorkflow
+        {
+            AccessTokenUrl = AppSettings.AccessTokenUri,
+            ConsumerKey = AppSettings.consumerKey,
+            ConsumerSecret = AppSettings.consumerKeySecret,
+            ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
+            SignatureMethod = OAuthSignatureMethod.HmacSha1,
+            Token = MainUtil.GetKeyValue<string>("AccessToken"),
+            Version = AppSettings.oAuthVersion //
+        };
+
+        var info = oauth.BuildAccessTokenInfo(WebMethod.Post);
+
+        ////replace signature
+        //info.Signature = AppSettings.consumerKeySecret + "&" + oauth.TokenSecret;
+        //info.Signature = HttpUtility.UrlEncode(info.Signature);
+        ////replace signature
+
         var objOAuthWebQuery = new OAuthWebQuery(info, false);
         objOAuthWebQuery.HasElevatedPermissions = true;
         objOAuthWebQuery.SilverlightUserAgentHeader = "Hammock";

@@ -20,13 +20,12 @@ namespace PhoneApp1
     {
         RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
         string _teamKey = "273.l.216711.t.11";
-       
+
         public Page1()
         {
             InitializeComponent();
 
             client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
-        //   client.AddDefaultParameter("format", "json");
 
         }
 
@@ -34,7 +33,7 @@ namespace PhoneApp1
         {
 
         //    var request = new RestRequest("/users;use_login=1/games;game_keys=314,273/teams", Method.GET);
-           var request = new RestRequest(String.Format(("teams;team_keys={0}/roster"), _teamKey), Method.GET);
+            var request = new RestRequest("/users;use_login=1/games;game_keys=273,314/teams", Method.GET);
            
 
             client.ExecuteAsync(request, response =>
@@ -43,64 +42,77 @@ namespace PhoneApp1
                     doc = XDocument.Parse(response.Content.ToString());
                     string newjson = "";
 
-                    try 
-                    {
+                    newjson = JsonConvert.SerializeXNode(doc);
 
-                        newjson = JsonConvert.SerializeXNode(doc);
+                    List<Game> games = new List<Game>();
+                    List<Team> teams = new List<Team>();
 
-                        MessageBox.Show(newjson);
-                    }
-
-                    catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
                     JObject o = JObject.Parse(newjson);
 
-                    JArray ja = (JArray)o["fantasy_content"]["teams"]["team"]["roster"]["players"]["player"];
 
-                    List<Player> players = new List<Player>();
+                    try
+                    {
 
-             
-                  //  players = ja.Cast<Player>().ToList();
+                        if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] == 1)
+                        {
+                            JObject _game = (JObject)o["fantasy_content"]["users"]["user"]["games"]["game"];
+                            games.Add(JsonConvert.DeserializeObject<Game>(_game.ToString()));
 
-                    //for(int i = 0; i<ja.Count; i++)
-                    //{
-                    //    players.Add(ja[i]);
-                    //}
+                            if ((int)_game["teams"]["@count"] == 1)
+                            {
+                                teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"]));
+                            }
+                            if ((int)_game["teams"]["@count"] > 1)
+                            {
+                                JArray _teams = (JArray)_game["teams"]["team"];
 
-
-             //       string _teamName = "";
-             //       try
-             //       {
-             //           JObject o = JObject.Parse(response.Content.ToString());
-
-             //           JObject jo = (JObject)o["fantasy_content"]["team"][1]["roster"]["0"]["players"];
-                       
-             //           int count = jo.Count;
-
-             //         //  JObject subobj = new JObject();
-             //           JArray ja = new JArray();
-
-             //           List<Player> players = new List<Player>();
-
-             //           for (int i = 0; i< jo.Count-1 ; i++)
-             //           {
-             //               //subobj = (JObject)jo[i.ToString()];
-             //               ja = (JArray)jo[i.ToString()]["player"][0];
-             //               players.Add(JsonConvert.DeserializeObject<Player>(ja.ToString()));
-             //           }
+                                for (int i = 0; i < _teams.Count; i++)
+			{
+			    _teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
+			}
+                            }
 
 
+                        };
 
-             //               //JsonConvert.DeserializeObject<List<Player>>(response.Content.ToString());
+                        if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] > 1)
+                        {
+                            JArray _games = (JArray)o["fantasy_content"]["users"]["user"]["games"]["game"];
 
-             //////           _teamName = (string)o["fantasy_content"]["users"]["0"]["user"][0]["guid"];  // team key  "team_key": "273.l.216711.t.11"
+                            for (int i = 0; i < o.Count; i++)
+                            {
+                                games.Add(JsonConvert.DeserializeObject<Game>(_games[i].ToString()));
+                            
+                                if ((int)_games[i]["teams"]["@count"] == 1)
+                            {
+                                teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"].ToString()));
+                            }
+                            if ((int)_games[i]["teams"]["@count"] > 1)
+                            {
+                                JArray _teams = (JArray)_games[i]["teams"]["team"];
 
-             //////           MessageBox.Show(_teamName);
-             ////       }
-             //       catch (Exception ex)
-             //       {
-             //           MessageBox.Show(ex.ToString());
-             //       }
+                                for (int j = 0; j < _teams.Count; i++)
+			{
+			    _teams.Add(JsonConvert.DeserializeObject<Team>((string)_games[i]["teams"]["team"][j]));
+			}
+                            }
+                            
+                            }
+
+
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {MessageBox.Show(ex.ToString()); }
+
+                    
+
+
+
+
+
 
 
                     MessageBox.Show(response.Content.ToString());
