@@ -53,9 +53,11 @@ namespace PhoneApp1
 
             if (duration > 3500)
             {
-                var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
-                RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
-                RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
+                SignOut();
+
+                //var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
+                //RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
+                //RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
                
             }
 
@@ -89,6 +91,24 @@ namespace PhoneApp1
         }
 
         private void MenuItemSignOut_Click(object sender, EventArgs e)
+        {
+            MainUtil.SetKeyValue<string>("AccessToken", string.Empty);
+            MainUtil.SetKeyValue<string>("AccessTokenSecret", string.Empty);
+            Dispatcher.BeginInvoke(() =>
+            {
+                var SignInMenuItem = (Microsoft.Phone.Shell.ApplicationBarMenuItem)this.ApplicationBar.MenuItems[0];
+                SignInMenuItem.IsEnabled = true;
+
+                var SignOutMenuItem = (Microsoft.Phone.Shell.ApplicationBarMenuItem)this.ApplicationBar.MenuItems[1];
+                SignOutMenuItem.IsEnabled = false;
+
+                TweetPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+                MessageBox.Show("You have been signed out successfully.");
+            });
+        }
+
+        private void SignOut()
         {
             MainUtil.SetKeyValue<string>("AccessToken", string.Empty);
             MainUtil.SetKeyValue<string>("AccessTokenSecret", string.Empty);

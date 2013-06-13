@@ -1,18 +1,31 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="PhoneApp1.Page1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:Model="clr-namespace:PhoneApp1.Model"
+    x:Class="PhoneApp1.Page1"
+    DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+            <StackPanel/>
+        </ItemsPanelTemplate>
+    </phone:PhoneApplicationPage.Resources>
 
+    <phone:PhoneApplicationPage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+    </phone:PhoneApplicationPage.FontFamily>
+    <phone:PhoneApplicationPage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+    </phone:PhoneApplicationPage.FontSize>
+    <phone:PhoneApplicationPage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </phone:PhoneApplicationPage.Foreground>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -28,11 +41,18 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="14,10,10,-10">
-            <StackPanel>
-                <TextBlock>sup</TextBlock>
-            </StackPanel>
-            
-            
+            <phone:LongListSelector  HorizontalAlignment="Left" Height="587" Margin="27,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="391" DataContext="{Binding TeamList}" ItemsSource="{Binding}">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,17">
+                            <TextBlock Text="{Binding name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+
+            </phone:LongListSelector>
+
+
             <Button Content="Select" Click="Button_Click_1" HorizontalAlignment="Left" Height="75" Margin="289,522,0,0" VerticalAlignment="Top" Width="157"/>
 
         </Grid>
