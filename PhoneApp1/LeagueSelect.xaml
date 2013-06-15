@@ -41,16 +41,16 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="14,10,10,-10">
-            <phone:LongListSelector  HorizontalAlignment="Left" Height="587" Margin="27,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="391" DataContext="{Binding TeamList}" ItemsSource="{Binding}">
-                <phone:LongListSelector.ItemTemplate>
+            <ListBox x:Name="LeagueSelectListBox"  HorizontalAlignment="Left" Height="587" Margin="27,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="391" DataContext="{Binding TeamList}" ItemsSource="{Binding}" SelectedItem="{Binding SelectedTeam, Mode=TwoWay}" d:IsHidden="True">
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="0,0,0,17">
-                            <TextBlock Text="{Binding name}"></TextBlock>
+                            <TextBlock Text="{Binding name, Mode=TwoWay}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
-                </phone:LongListSelector.ItemTemplate>
+                </ListBox.ItemTemplate>
 
-            </phone:LongListSelector>
+            </ListBox>
 
 
             <Button Content="Select" Click="Button_Click_1" HorizontalAlignment="Left" Height="75" Margin="289,522,0,0" VerticalAlignment="Top" Width="157"/>
