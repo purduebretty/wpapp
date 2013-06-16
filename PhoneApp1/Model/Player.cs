@@ -29,7 +29,7 @@ namespace PhoneApp1.Model
 
         public class EligiblePositions
         {
-            public string position { get; set; }
+            public object position { get; set; }
         }
 
         public class SelectedPosition

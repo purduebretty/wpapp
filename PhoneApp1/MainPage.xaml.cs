@@ -15,6 +15,7 @@ using System.Web;
 using Hammock;
 using Hammock.Web;
 using System.IO;
+using System.IO.IsolatedStorage;
 
 namespace PhoneApp1
 {
@@ -85,7 +86,17 @@ namespace PhoneApp1
                 //TweetPanel.Visibility = System.Windows.Visibility.Visible;
                 //txtUserName.Text = "Welcome "; // + userScreenName;
 
-               NavigationService.Navigate(new Uri("/LeagueSelect.xaml", UriKind.Relative));
+                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+
+                if ((string)appSettings["teamKey"] == "" || (string)appSettings["teamKey"] == null)
+                {
+                    NavigationService.Navigate(new Uri("/LeagueSelect.xaml", UriKind.Relative));
+                }
+                else 
+                {
+                    NavigationService.Navigate(new Uri("/Roster.xaml", UriKind.Relative));
+                }
+
 
             });
         }

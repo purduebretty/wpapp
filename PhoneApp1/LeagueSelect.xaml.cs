@@ -35,8 +35,10 @@ namespace PhoneApp1
         {
             Team tempTeamKey = (Team)LeagueSelectListBox.SelectedItem;
             IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-            appSettings.Add("teamKey", tempTeamKey.team_key);
-            appSettings.Add("teamName", tempTeamKey.name);
+
+            appSettings["teamKey"] = tempTeamKey.team_key;
+            appSettings["teamName"] = tempTeamKey.name;
+
 
             NavigationService.Navigate(new Uri("/Roster.xaml", UriKind.Relative));
 

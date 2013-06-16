@@ -28,7 +28,20 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,10,12,-10">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
+            <ListBox x:Name="RosterSelectListBox"  HorizontalAlignment="Left" Height="587" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="391" DataContext="{Binding Roster}" ItemsSource="{Binding}" d:IsHidden="True">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="120" Text="{Binding name.full, Mode=TwoWay}"></TextBlock>
+                                <TextBlock Text="{Binding selected_position.position}" ></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
             <Button Content="Button" Click="Button_Click" HorizontalAlignment="Left" Height="75" Margin="279,522,0,0" VerticalAlignment="Top" Width="146"/>
 
         </Grid>
