@@ -102,7 +102,6 @@ C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\ICSharpCode.SharpZipLi
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Newtonsoft.Json.xml
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\RestSharp.WindowsPhone.xml
-C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.csprojResolveAssemblyReference.cache
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\App.g.cs
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\MainPage.g.cs
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\LeagueSelect.g.cs

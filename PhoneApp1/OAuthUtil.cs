@@ -62,6 +62,8 @@ public class OAuthUtil
             ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
             SignatureMethod = OAuthSignatureMethod.HmacSha1,
             Token = MainUtil.GetKeyValue<string>("AccessToken"),
+            TokenSecret = MainUtil.GetKeyValue<string>("AccessTokenSecret"),
+            SessionHandle = MainUtil.GetKeyValue<string>("SessionHandle"),
             Version = AppSettings.oAuthVersion //
         };
 

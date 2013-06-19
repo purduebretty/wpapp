@@ -27,6 +27,7 @@ namespace PhoneApp1
         string accessToken = string.Empty;
         string accessTokenSecret = string.Empty;
         string timestamp = string.Empty;
+        string sessionHandle = string.Empty;
         
         // Constructor
         public MainPage()
@@ -54,11 +55,12 @@ namespace PhoneApp1
 
             if (duration > 3500)
             {
-                SignOut();
+               SignOut();
 
                 //var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
-                //RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
                 //RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
+
+                //RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
                
             }
 
@@ -88,15 +90,18 @@ namespace PhoneApp1
 
                 IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
-                if ((string)appSettings["teamKey"] == "" || (string)appSettings["teamKey"] == null)
-                {
                     NavigationService.Navigate(new Uri("/LeagueSelect.xaml", UriKind.Relative));
-                }
-                else 
-                {
-                    NavigationService.Navigate(new Uri("/Roster.xaml", UriKind.Relative));
-                }
+                
 
+
+                //if ((string)appSettings["teamKey"] == "" || (string)appSettings["teamKey"] == null)
+                //{
+                //    NavigationService.Navigate(new Uri("/LeagueSelect.xaml", UriKind.Relative));
+                //}
+                //else
+                //{
+                //    NavigationService.Navigate(new Uri("/Roster.xaml", UriKind.Relative));
+                //}
 
             });
         }
@@ -198,12 +203,14 @@ namespace PhoneApp1
                 var parameters = MainUtil.GetQueryParameters(strResponse);
                 accessToken = parameters["oauth_token"];
                 accessTokenSecret = parameters["oauth_token_secret"];
+                sessionHandle = parameters["oauth_session_handle"];
                 TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
                 
                 MainUtil.SetKeyValue<string>("AccessToken", accessToken);
                 MainUtil.SetKeyValue<string>("AccessTokenSecret", accessTokenSecret);
                 MainUtil.SetKeyValue<string>("Timestamp", t.TotalSeconds.ToString());
-        
+                MainUtil.SetKeyValue<string>("SessionHandle", sessionHandle);
+
                 userLoggedIn();
             }
             catch (Exception ex)

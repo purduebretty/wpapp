@@ -99,6 +99,7 @@
     <Compile Include="MainUtil.cs" />
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\YahooAPI.cs" />
     <Compile Include="OAuthUtil.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">

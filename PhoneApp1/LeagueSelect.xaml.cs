@@ -39,7 +39,6 @@ namespace PhoneApp1
             appSettings["teamKey"] = tempTeamKey.team_key;
             appSettings["teamName"] = tempTeamKey.name;
 
-
             NavigationService.Navigate(new Uri("/Roster.xaml", UriKind.Relative));
 
 
