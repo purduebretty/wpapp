@@ -8,6 +8,8 @@ Processing file: C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\
 File C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\Hammock.WindowsPhone.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\ICSharpCode.SharpZipLib.WindowsPhone.dll
 File C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\ICSharpCode.SharpZipLib.WindowsPhone.dll is not in the compile filter. Skipping.
+Processing file: C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\Microsoft.Phone.Controls.dll
+File C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\Microsoft.Phone.Controls.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\Microsoft.Practices.ServiceLocation.dll
 File C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\Microsoft.Practices.ServiceLocation.dll is not in the compile filter. Skipping.
 Processing file: C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\MDIL\Newtonsoft.Json.dll

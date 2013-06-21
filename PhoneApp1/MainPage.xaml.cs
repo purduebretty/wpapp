@@ -90,7 +90,7 @@ namespace PhoneApp1
 
                 IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
-                    NavigationService.Navigate(new Uri("/LeagueSelect.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/Views/LeagueSelect.xaml", UriKind.Relative));
                 
 
 

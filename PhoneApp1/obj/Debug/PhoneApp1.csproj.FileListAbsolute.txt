@@ -104,14 +104,12 @@ C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Newtonsoft.Json.xml
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\RestSharp.WindowsPhone.xml
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\App.g.cs
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\MainPage.g.cs
-C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\LeagueSelect.g.cs
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.g.resources
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.Resources.AppResources.resources
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.csproj.GenerateResource.Cache
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.dll
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.pdb
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\XapCacheFile.xml
-C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Roster.g.cs
 C:\Users\Brett\Downloads\wpapp-master (1)\wpapp-master\PhoneApp1\Bin\Debug\Assets\ApplicationIcon.png
 C:\Users\Brett\Downloads\wpapp-master (1)\wpapp-master\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png
 C:\Users\Brett\Downloads\wpapp-master (1)\wpapp-master\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png
@@ -151,3 +149,8 @@ C:\Users\Brett\Downloads\wpapp-master (1)\wpapp-master\PhoneApp1\obj\Debug\Phone
 C:\Users\Brett\Downloads\wpapp-master (1)\wpapp-master\PhoneApp1\obj\Debug\PhoneApp1.dll
 C:\Users\Brett\Downloads\wpapp-master (1)\wpapp-master\PhoneApp1\obj\Debug\PhoneApp1.pdb
 C:\Users\Brett\Downloads\wpapp-master (1)\wpapp-master\PhoneApp1\obj\Debug\XapCacheFile.xml
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.csprojResolveAssemblyReference.cache
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\LeagueSelect.g.cs
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\Roster.g.cs
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Microsoft.Phone.Controls.dll
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\RosterPivot.g.cs
