@@ -97,6 +97,7 @@
     <Compile Include="Assets\AppBar\JsonSerializer.cs" />
     <Compile Include="Assets\RSSerializer.cs" />
     <Compile Include="MainUtil.cs" />
+    <Compile Include="Model\FantasyContent.cs" />
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\YahooAPI.cs" />
