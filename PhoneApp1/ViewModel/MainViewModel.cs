@@ -7,9 +7,11 @@ using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace PhoneApp1.ViewModel
 {
@@ -30,18 +32,21 @@ namespace PhoneApp1.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-                RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
-      //  string _teamKey = "273.l.216711.t.11";
-
+            RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
+       
+   
                 ObservableCollection<Game> games = new ObservableCollection<Game>();
+                ObservableCollection<StringObject> _eligiblePositions = new ObservableCollection<StringObject>();
                 ObservableCollection<Team> teams = new ObservableCollection<Team>();
-                ObservableCollection<Stat> statKeys = new ObservableCollection<Stat>();
-                ObservableCollection<Player> _roster = new ObservableCollection<Player>();    
-
+                ObservableCollection<fantasy_contentTeamRosterPlayers> _players = new ObservableCollection<fantasy_contentTeamRosterPlayers>();
+                 ObservableCollection<fantasy_contentTeamRosterPlayersPlayer> _roster = new ObservableCollection<fantasy_contentTeamRosterPlayersPlayer>();    
+        
                 private Team _selectedTeam = null;
-
+                private fantasy_contentTeamRosterPlayersPlayer _selectedPlayer = new fantasy_contentTeamRosterPlayersPlayer();
                 public const string RosterPropertyName = "Roster";
-                
+                public const string SelectedPlayerPropertyName = "SelectedPlayer";
+                public const string EligiblePositionsPropertyName = "EligiblePositions";
+
 
                 IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
@@ -68,7 +73,7 @@ namespace PhoneApp1.ViewModel
                         teams.Add(new Team { name = "Foster the Arian People" });
 
 
-                        _roster.Add(new Player { name = { full = "Bobby Bouche" } });
+          //              _roster.Add(new Player { name = { full = "Bobby Bouche" } });
 
                       
 
@@ -88,13 +93,15 @@ namespace PhoneApp1.ViewModel
                             
                         {
 
-                            var request = new RestRequest("/users;use_login=1/games;game_keys=273,314/teams", Method.GET);
+                            var request = new RestRequest("users;use_login=1/games;game_keys=273,314/teams", Method.GET);  ///users;use_login=1/games;game_keys=273,314/teams
 
 
                             client.ExecuteAsync(request, response =>
                                 {
                                     XDocument doc = new XDocument();
                                     doc = XDocument.Parse(response.Content.ToString());
+                                 
+                                    
                                     string newjson = "";
 
                                     newjson = JsonConvert.SerializeXNode(doc);
@@ -178,50 +185,37 @@ namespace PhoneApp1.ViewModel
         }
 
 
-        public ObservableCollection<Player> Roster
+        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayer> Roster
         {
+         
             get
             {
-                if (_roster.Count ==0)
-                {
 
+                {
                     string _teamKey = (string)appSettings["teamKey"];
                     string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
-                    ObservableCollection<Player> rosterWithStats = new ObservableCollection<Player>();
-                    //    var request = new RestRequest("/users;use_login=1/games;game_keys=314,273/teams", Method.GET);
                     var request = new RestRequest(String.Format(("team/{0}/roster/players/stats"), _teamKey), Method.GET); //changed 'roster' to 'stats;type=week;week=current'
 
 
                     client.ExecuteAsync(request, response =>
                         {
+                            _roster.Clear();
+
                             XDocument doc = new XDocument();
-                            doc = XDocument.Parse(response.Content.ToString());
-                            string newjson = "", _playerKey = "";
+                            XmlSerializer serializer = new XmlSerializer(typeof(fantasy_content));
 
-                            try
+
+                            MemoryStream playerxmlstream = new MemoryStream();
+
+      
+                            var roster = (fantasy_content)serializer.Deserialize(new StringReader(response.Content.ToString()));
+
+                            _players.Add(roster.team.roster.players);
+
+                            for (int i = 0; i < _players[0].count; i++)
                             {
-
-                                newjson = JsonConvert.SerializeXNode(doc);
-
-                            }
-
-                            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-
-                            JObject o = JObject.Parse(newjson);
-
-                            JArray ja = (JArray)o["fantasy_content"]["team"]["roster"]["players"]["player"];
-
-                            for (int i = 0; i < ja.Count; i++)
-                            {
-
-                                try
-                                {
-                                    _roster.Add(JsonConvert.DeserializeObject<Player>(ja[i].ToString()));
-                                }
-
-                                catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-                            }
-
+                                _roster.Add(_players[0].player[i]);
+                            }      
                         });
             
                 }
@@ -241,69 +235,65 @@ namespace PhoneApp1.ViewModel
                 RaisePropertyChanged(RosterPropertyName);
 
             }
-             
-            //get
-            //{
+            }
 
-            //    if (IsInDesignMode)
-            //    {
-            //        #region DesignTimeRosterData
-            //        ObservableCollection<Player> roster = new ObservableCollection<Player>();
+        public fantasy_contentTeamRosterPlayersPlayer SelectedPlayer 
+        {
+            get
+            {
+                return _selectedPlayer;
+                
 
-            //        roster.Add(new Player { name = { full = "Bobby Bouche" } });
+            }
 
-            //        return roster;
-            //        #endregion
-            //    }
+            set
+            {
+                if (_selectedPlayer == value)
+                {
+                    return;
+                }
 
-            //    else
-            //    {
-
-            //        string _teamKey = (string)appSettings["teamKey"];
-            //        string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
-            //        ObservableCollection<Player> roster = new ObservableCollection<Player>();
-            //        ObservableCollection<Player> rosterWithStats = new ObservableCollection<Player>();
-            //        //    var request = new RestRequest("/users;use_login=1/games;game_keys=314,273/teams", Method.GET);
-            //        var request = new RestRequest(String.Format(("team/{0}/roster/players/stats"), _teamKey), Method.GET); //changed 'roster' to 'stats;type=week;week=current'
+                RaisePropertyChanging(SelectedPlayerPropertyName);
+                _selectedPlayer = value;
+                RaisePropertyChanged(SelectedPlayerPropertyName);
 
 
-            //            client.ExecuteAsync(request, response =>
-            //                {
-            //                    XDocument doc = new XDocument();
-            //                    doc = XDocument.Parse(response.Content.ToString());
-            //                    string newjson = "", _playerKey = "";
+                if (_selectedPlayer.eligible_positions != null)
+                {
+                    _eligiblePositions.Clear();
+                    foreach (var item in _selectedPlayer.eligible_positions)
+                    {
+                        _eligiblePositions.Add(new StringObject { value = item });
+                    }
+                }
 
-            //                    try
-            //                    {
+            }
 
-            //                        newjson = JsonConvert.SerializeXNode(doc);
 
-            //                    }
-
-            //                    catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-
-            //                    JObject o = JObject.Parse(newjson);
-
-            //                    JArray ja = (JArray)o["fantasy_content"]["team"]["roster"]["players"]["player"];
-
-            //                    for (int i = 0; i < ja.Count; i++)
-            //                    {
-
-            //                        try
-            //                        {
-            //                            roster.Add(JsonConvert.DeserializeObject<Player>(ja[i].ToString()));
-            //                        }
-
-            //                        catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-            //                    }
-
-            //                });
-                    
-            //        return roster;
-            //    }
-            //}
         }
-        
+
+        public ObservableCollection<StringObject> EligiblePositions
+        {
+            get
+            {
+
+                return _eligiblePositions;
+            }
+
+            set
+            {
+                if (_eligiblePositions == value)
+                {
+                    return;
+                }
+
+                RaisePropertyChanging(EligiblePositionsPropertyName);
+                _eligiblePositions = value;
+                RaisePropertyChanged(EligiblePositionsPropertyName);
+            }
+
+
+        }
 
         public ObservableCollection<Team> TeamList
         {

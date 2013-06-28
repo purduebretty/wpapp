@@ -19,15 +19,118 @@
         <!--Pivot Control-->
         <phone:Pivot Title="{Binding TeamName}">
             <!--Pivot item one-->
-            <phone:PivotItem Header="item1">
-                
-                <Grid/>
-                
+            <phone:PivotItem Header="All Players">
+
+                <Grid x:Name="ContentPanel" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Name" Grid.Column="0" TextDecorations="Underline"/>
+                        <TextBlock Text="Pos" Grid.Column="1" TextDecorations="Underline"></TextBlock>
+                        <TextBlock Text="Team" Grid.Column="2" TextDecorations="Underline"/>
+                        <TextBlock Text="Pts" Grid.Column="3" TextDecorations="Underline"/>
+
+                    </Grid>
+                    <ListBox x:Name="RosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                          SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster}" d:IsHidden="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="RosterLayout">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding name.full}" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding display_position}" Grid.Column="1" ></TextBlock>
+                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2"/>
+                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="3"/>
+
+                                    </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                    <ListBox x:Name="PositionListBox"  Grid.Row="2"  
+                          ItemsSource="{Binding EligiblePositions}" d:IsHidden="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="RosterLayout">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding value}" Grid.Column="0"></TextBlock>
+                               
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" DataContext="{Binding EligiblePositions}">
+                        
+                        <TextBlock Text="{Binding value}"/>
+                    </StackPanel>
+                </Grid>
+
+
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="item2">
-                <Grid/>
+            <phone:PivotItem Header="Offense">
+                <Grid x:Name="OffenseContentPanel" Margin="12,0,12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Name" Grid.Column="0" TextDecorations="Underline"/>
+                        <TextBlock Text="Pos" Grid.Column="1" TextDecorations="Underline"></TextBlock>
+                        <TextBlock Text="Team" Grid.Column="2" TextDecorations="Underline"/>
+                        <TextBlock Text="Pts" Grid.Column="3" TextDecorations="Underline"/>
+
+                    </Grid>
+                    <ListBox x:Name="OffenseRosterSelectListBox"  HorizontalAlignment="Left" Height="587" Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                           DataContext="{Binding Roster}" ItemsSource="{Binding}" d:IsHidden="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="RosterLayout">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding name.full, Mode=TwoWay}" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding display_position}" Grid.Column="1" ></TextBlock>
+                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2"/>
+                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="3"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </Grid>
+
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
