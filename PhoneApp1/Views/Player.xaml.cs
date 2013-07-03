@@ -7,24 +7,24 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using System.Windows.Media;
+using PhoneApp1.ViewModel;
 
 namespace PhoneApp1.Views
 {
-    
-  
-    public partial class RosterPivot : PhoneApplicationPage
+    public partial class Player : PhoneApplicationPage
     {
-        public RosterPivot()
+        public Player()
         {
             InitializeComponent();
+
         }
 
-        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/Player.xaml", UriKind.Relative));
+
         }
 
 
-  }
+    
+    }
 }

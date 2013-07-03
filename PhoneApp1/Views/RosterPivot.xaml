@@ -1,11 +1,13 @@
 ﻿<phone:PhoneApplicationPage
     x:Class="PhoneApp1.Views.RosterPivot"
+    
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:l="clr-namespace:PhoneApp1.Model"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -13,7 +15,11 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     DataContext="{Binding Main, Mode=OneTime, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
-
+    
+    <phone:PhoneApplicationPage.Resources>
+        <l:OffenseVisibility x:Name="ShowOffense"/>
+        <l:BenchColor x:Name="DisableBenchColor"/>
+    </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
@@ -44,53 +50,32 @@
                           SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster}" d:IsHidden="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid x:Name="RosterLayout">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding name.full}" Grid.Column="0"></TextBlock>
+                                    <Grid x:Name="RosterLayout">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="60"/>
+                                        </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding name.full}" Grid.Column="0"/>
                                     <TextBlock Text="{Binding display_position}" Grid.Column="1" ></TextBlock>
                                     <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2"/>
                                     <TextBlock Text="{Binding player_points.total}" Grid.Column="3"/>
 
-                                    </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-
-                    </ListBox>
-                    <ListBox x:Name="PositionListBox"  Grid.Row="2"  
-                          ItemsSource="{Binding EligiblePositions}" d:IsHidden="True">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid x:Name="RosterLayout">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding value}" Grid.Column="0"></TextBlock>
-                               
                                 </Grid>
+
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
                     </ListBox>
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" DataContext="{Binding EligiblePositions}">
-                        
-                        <TextBlock Text="{Binding value}"/>
-                    </StackPanel>
                 </Grid>
 
 
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="Offense">
-                <Grid x:Name="OffenseContentPanel" Margin="12,0,12,0">
+            <phone:PivotItem Header="Rushing">
+                <Grid x:Name="RushingContentPanel" Margin="12,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -101,30 +86,34 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Name" Grid.Column="0" TextDecorations="Underline"/>
-                        <TextBlock Text="Pos" Grid.Column="1" TextDecorations="Underline"></TextBlock>
-                        <TextBlock Text="Team" Grid.Column="2" TextDecorations="Underline"/>
-                        <TextBlock Text="Pts" Grid.Column="3" TextDecorations="Underline"/>
-
+                        <TextBlock Text="Att" Grid.Column="1" TextDecorations="Underline"/>
+                        <TextBlock Text="Yards" Grid.Column="2" TextDecorations="Underline"/>
+                        <TextBlock Text="TDs" Grid.Column="3" TextDecorations="Underline"/>
+                        <TextBlock Text="Fum" Grid.Column="4" TextDecorations="Underline"/>
                     </Grid>
-                    <ListBox x:Name="OffenseRosterSelectListBox"  HorizontalAlignment="Left" Height="587" Grid.Row="1" VerticalAlignment="Top" Width="391" 
-                           DataContext="{Binding Roster}" ItemsSource="{Binding}" d:IsHidden="True">
+                    <ListBox x:Name="OffenseRosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                          SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster}" d:IsHidden="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid x:Name="RosterLayout">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="200"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding name.full, Mode=TwoWay}" Grid.Column="0"></TextBlock>
-                                    <TextBlock Text="{Binding display_position}" Grid.Column="1" ></TextBlock>
-                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2"/>
-                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="3"/>
+                                    <TextBlock Text="{Binding name.full}" Grid.Column="0" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }" />
+                                    <TextBlock Text="{Binding player_stats.stats.stat.stat_id}" Grid.Column="1" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }"/>
+                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }"/>
+                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="3" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }"/>
 
                                 </Grid>
+
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
@@ -134,5 +123,14 @@
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
-    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/questionmark.png" Text=" player info" Click="ApplicationBarIconButton_Click"/>
+            <!--<shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
+    

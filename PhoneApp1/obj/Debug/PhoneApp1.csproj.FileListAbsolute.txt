@@ -154,3 +154,4 @@ C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\LeagueSelect.g.c
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\Roster.g.cs
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Microsoft.Phone.Controls.dll
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\RosterPivot.g.cs
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\Player.g.cs

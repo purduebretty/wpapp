@@ -97,6 +97,8 @@
     <Compile Include="Assets\AppBar\JsonSerializer.cs" />
     <Compile Include="Assets\RSSerializer.cs" />
     <Compile Include="MainUtil.cs" />
+    <Compile Include="Model\Commands.cs" />
+    <Compile Include="Model\Converters.cs" />
     <Compile Include="Model\FantasyContent.cs" />
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\Player.cs" />
@@ -108,6 +110,9 @@
     </Compile>
     <Compile Include="Views\LeagueSelect.xaml.cs">
       <DependentUpon>LeagueSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player.xaml.cs">
+      <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Roster.xaml.cs">
       <DependentUpon>Roster.xaml</DependentUpon>
@@ -138,6 +143,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Player.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Roster.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +169,8 @@
     <Content Include="Assets\AppBar\back.png" />
     <Content Include="Assets\AppBar\cancel.png" />
     <Content Include="Assets\AppBar\check.png" />
+    <Content Include="Assets\AppBar\edit.png" />
+    <Content Include="Assets\AppBar\questionmark.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

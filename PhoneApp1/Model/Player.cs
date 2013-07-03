@@ -9,7 +9,7 @@ namespace PhoneApp1.Model
 {
     public class StringObject 
     {
-        public string value { get; set; }
+        public string StringValue { get; set; }
     }
 
     /// <remarks/>
@@ -807,7 +807,14 @@ namespace PhoneApp1.Model
         {
             get
             {
-                return this.image_urlField;
+                string _largeImage = this.image_urlField;
+
+                if (_largeImage.IndexOf("--/http")>0)
+                {
+                    _largeImage = _largeImage.Substring(_largeImage.IndexOf("--/http")+3);
+                }
+                
+                return _largeImage;
             }
             set
             {
