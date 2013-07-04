@@ -1,38 +1,20 @@
-<<<<<<< HEAD
 ﻿<xapCache source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\PhoneApp1_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="7/3/2013 5:43:37 PM">
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.dll" archivePath="PhoneApp1.dll" lastWriteTime="7/3/2013 5:43:33 PM" />
-=======
-﻿<xapCache source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\PhoneApp1_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="6/23/2013 5:57:06 PM">
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.dll" archivePath="PhoneApp1.dll" lastWriteTime="6/23/2013 5:57:03 PM" />
->>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\AppBar\add.png" archivePath="Assets\AppBar\add.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\AppBar\back.png" archivePath="Assets\AppBar\back.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\AppBar\cancel.png" archivePath="Assets\AppBar\cancel.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\AppBar\check.png" archivePath="Assets\AppBar\check.png" lastWriteTime="6/23/2013 5:46:54 PM" />
-<<<<<<< HEAD
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\AppBar\edit.png" archivePath="Assets\AppBar\edit.png" lastWriteTime="3/3/2013 7:40:36 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\AppBar\questionmark.png" archivePath="Assets\AppBar\questionmark.png" lastWriteTime="3/3/2013 7:40:38 PM" />
-=======
->>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\Tiles\FlipCycleTileLarge.png" archivePath="Assets\Tiles\FlipCycleTileLarge.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\MVVMLight.Nuget.Readme.txt" archivePath="MVVMLight.Nuget.Readme.txt" lastWriteTime="6/23/2013 5:46:54 PM" />
-<<<<<<< HEAD
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="7/3/2013 11:31:32 AM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="6/23/2013 5:46:54 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="6/23/2013 5:46:54 PM" />
-=======
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="6/23/2013 5:55:08 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="6/23/2013 5:46:55 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png" archivePath="Assets\Tiles\FlipCycleTileLarge.png" lastWriteTime="6/23/2013 5:46:55 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="6/23/2013 5:46:55 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="6/23/2013 5:46:55 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="6/23/2013 5:46:55 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="6/23/2013 5:46:55 PM" />
->>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.Extras.WP8.dll" archivePath="GalaSoft.MvvmLight.Extras.WP8.dll" lastWriteTime="6/23/2013 5:46:51 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.WP8.dll" archivePath="GalaSoft.MvvmLight.WP8.dll" lastWriteTime="6/23/2013 5:46:51 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\packages\Hammock.1.3.1\lib\sl4-wp\Hammock.WindowsPhone.dll" archivePath="Hammock.WindowsPhone.dll" lastWriteTime="6/23/2013 5:46:48 PM" />
@@ -47,11 +29,5 @@
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\Microsoft.Practices.ServiceLocation.xml" archivePath="Microsoft.Practices.ServiceLocation.xml" lastWriteTime="6/23/2013 5:46:51 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\packages\Newtonsoft.Json.5.0.5\lib\portable-net45+wp80+win8\Newtonsoft.Json.xml" archivePath="Newtonsoft.Json.xml" lastWriteTime="6/23/2013 5:46:53 PM" />
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\packages\RestSharp.104.1\lib\sl4-wp71\RestSharp.WindowsPhone.xml" archivePath="RestSharp.WindowsPhone.xml" lastWriteTime="6/23/2013 5:46:54 PM" />
-<<<<<<< HEAD
   <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="7/3/2013 11:31:32 AM" />
-=======
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="6/23/2013 5:46:54 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="6/23/2013 5:46:54 PM" />
-  <file source="C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="6/23/2013 5:57:06 PM" />
->>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 </xapCache>
