@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -603,6 +604,27 @@ namespace PhoneApp1.Model
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
     public partial class fantasy_contentTeamRosterPlayersPlayer
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+
+
+            if (PropertyChanged != null)
+            {
+
+
+                PropertyChanged(this,
+
+
+                    new PropertyChangedEventArgs(propertyName));
+
+
+            }
+
+        } 
+
 
         private string player_keyField;
 
@@ -642,7 +664,7 @@ namespace PhoneApp1.Model
 
         private fantasy_contentTeamRosterPlayersPlayerSelected_position selected_positionField;
 
-        private fantasy_contentTeamRosterPlayersPlayerPlayer_stats player_statsField;
+        private ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_stats> player_statsField;
 
         private fantasy_contentTeamRosterPlayersPlayerPlayer_points player_pointsField;
 
@@ -903,7 +925,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRosterPlayersPlayerPlayer_stats player_stats
+        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_stats> player_stats
         {
             get
             {
@@ -912,6 +934,8 @@ namespace PhoneApp1.Model
             set
             {
                 this.player_statsField = value;
+                OnPropertyChanged("player_stats");
+                
             }
         }
 
@@ -1120,14 +1144,31 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_stats
+    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_stats : INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged; 
+
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+
+
+                PropertyChanged(this,
+
+
+                    new PropertyChangedEventArgs(propertyName));
+            }
+        } 
+
 
         private string coverage_typeField;
 
         private byte weekField;
 
-        private fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[] statsField;
+        private ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> statsField;
 
         /// <remarks/>
         public string coverage_type
@@ -1157,7 +1198,7 @@ namespace PhoneApp1.Model
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("stat", IsNullable = false)]
-        public fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[] stats
+        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> stats
         {
             get
             {
@@ -1165,7 +1206,10 @@ namespace PhoneApp1.Model
             }
             set
             {
+
                 this.statsField = value;
+                OnPropertyChanged("stats");
+                
             }
         }
     }
