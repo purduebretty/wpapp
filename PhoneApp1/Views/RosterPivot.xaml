@@ -27,11 +27,18 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="All Players">
 
+<<<<<<< HEAD
                 <Grid x:Name="ContentPanel" Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
+=======
+                <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -46,6 +53,7 @@
                         <TextBlock Text="Pts" Grid.Column="3" TextDecorations="Underline"/>
 
                     </Grid>
+<<<<<<< HEAD
                     <ListBox x:Name="RosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
                           SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster}" d:IsHidden="True">
                         <ListBox.ItemTemplate>
@@ -58,12 +66,29 @@
                                             <ColumnDefinition Width="60"/>
                                         </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding name.full}" Grid.Column="0"/>
+=======
+                    <ListBox x:Name="RosterSelectListBox"  HorizontalAlignment="Left" Height="587" Margin="12,0,12,0" Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                           DataContext="{Binding Roster}" ItemsSource="{Binding}" d:IsHidden="True">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="RosterLayout">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding name.full, Mode=TwoWay}" Grid.Column="0"></TextBlock>
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
                                     <TextBlock Text="{Binding display_position}" Grid.Column="1" ></TextBlock>
                                     <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2"/>
                                     <TextBlock Text="{Binding player_points.total}" Grid.Column="3"/>
 
                                 </Grid>
+<<<<<<< HEAD
 
+=======
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
@@ -74,8 +99,13 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
+<<<<<<< HEAD
             <phone:PivotItem Header="Rushing">
                 <Grid x:Name="RushingContentPanel" Margin="12,0,0,0">
+=======
+            <phone:PivotItem Header="Offense">
+                <Grid x:Name="OffenseContentPanel" Margin="12,0,12,0">
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -86,6 +116,7 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
+<<<<<<< HEAD
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Name" Grid.Column="0" TextDecorations="Underline"/>
@@ -96,11 +127,23 @@
                     </Grid>
                     <ListBox x:Name="OffenseRosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
                           SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster}" d:IsHidden="True">
+=======
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Name" Grid.Column="0" TextDecorations="Underline"/>
+                        <TextBlock Text="Pos" Grid.Column="1" TextDecorations="Underline"></TextBlock>
+                        <TextBlock Text="Team" Grid.Column="2" TextDecorations="Underline"/>
+                        <TextBlock Text="Pts" Grid.Column="3" TextDecorations="Underline"/>
+
+                    </Grid>
+                    <ListBox x:Name="OffenseRosterSelectListBox"  HorizontalAlignment="Left" Height="587" Margin="12,0,12,0" Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                           DataContext="{Binding Roster}" ItemsSource="{Binding}" d:IsHidden="True">
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid x:Name="RosterLayout">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="200"/>
+<<<<<<< HEAD
                                         <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="50"/>
@@ -114,6 +157,18 @@
 
                                 </Grid>
 
+=======
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding name.full, Mode=TwoWay}" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding display_position}" Grid.Column="1" ></TextBlock>
+                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2"/>
+                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="3"/>
+
+                                </Grid>
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 

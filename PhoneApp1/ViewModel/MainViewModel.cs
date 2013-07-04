@@ -8,7 +8,10 @@ using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+<<<<<<< HEAD
 using System.Diagnostics;
+=======
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows;
@@ -36,6 +39,7 @@ namespace PhoneApp1.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
+<<<<<<< HEAD
         RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
 
         ObservableCollection<Game> games = new ObservableCollection<Game>();
@@ -54,6 +58,18 @@ namespace PhoneApp1.ViewModel
         
 
         IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+=======
+            RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
+           //  RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
+       
+      //  string _teamKey = "273.l.216711.t.11";
+
+                ObservableCollection<Game> games = new ObservableCollection<Game>();
+                ObservableCollection<Team> teams = new ObservableCollection<Team>();
+              //  ObservableCollection<Stat> statKeys = new ObservableCollection<Stat>();
+                ObservableCollection<fantasy_contentTeamRosterPlayers> _players = new ObservableCollection<fantasy_contentTeamRosterPlayers>();
+                ObservableCollection<fantasy_contentTeamRosterPlayersPlayer> _roster = new ObservableCollection<fantasy_contentTeamRosterPlayersPlayer>();    
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
 
         
@@ -80,7 +96,11 @@ namespace PhoneApp1.ViewModel
 
                 teams.Add(new Team { name = "Foster the Arian People" });
 
+<<<<<<< HEAD
                 //_roster.Add(new fantasy_contentTeamRosterPlayersPlayer {editorial_team_abbr = "SEA"}) ;
+=======
+          //              _roster.Add(new Player { name = { full = "Bobby Bouche" } });
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
 
                 //              _roster.Add(new Player { name = { full = "Bobby Bouche" } });
@@ -110,12 +130,26 @@ namespace PhoneApp1.ViewModel
                             XDocument doc = new XDocument();
                             doc = XDocument.Parse(response.Content.ToString());
 
+<<<<<<< HEAD
+=======
+                            var request = new RestRequest("users;use_login=1/games;game_keys=273,314/teams", Method.GET);  ///users;use_login=1/games;game_keys=273,314/teams
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
                             string newjson = "";
 
+<<<<<<< HEAD
                             newjson = JsonConvert.SerializeXNode(doc);
 
                             JObject o = JObject.Parse(newjson);
+=======
+                            client.ExecuteAsync(request, response =>
+                                {
+                                    XDocument doc = new XDocument();
+                                    doc = XDocument.Parse(response.Content.ToString());
+                                 
+                                    
+                                    string newjson = "";
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
 
                             try
@@ -199,14 +233,25 @@ namespace PhoneApp1.ViewModel
 
             get
             {
+<<<<<<< HEAD
 
                     string _teamKey = (string)appSettings["teamKey"];
                     string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+=======
+             //   if (_roster.Count ==0)
+                {
+
+                    string _teamKey = (string)appSettings["teamKey"];
+                    string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+         //           ObservableCollection<Player> rosterWithStats = new ObservableCollection<Player>();
+                    //    var request = new RestRequest("/users;use_login=1/games;game_keys=314,273/teams", Method.GET);
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
                     var request = new RestRequest(String.Format(("team/{0}/roster/players/stats"), _teamKey), Method.GET); //changed 'roster' to 'stats;type=week;week=current'
 
                     if (_roster.Count == 0)
                     {
 
+<<<<<<< HEAD
                         client.ExecuteAsync(request, response =>
                             {
 
@@ -232,21 +277,88 @@ namespace PhoneApp1.ViewModel
                         return _roster;
                     }
                     else { return _roster; }
-            }
-            set
-            {
-                if (_roster == value)
-                {
-                    return;
+=======
+                    client.ExecuteAsync(request, response =>
+                        {
+                            XDocument doc = new XDocument();
+                 //           doc = XDocument.Parse(response.Content.ToString());
+
+                            XmlSerializer serializer = new XmlSerializer(typeof(fantasy_content));
+
+
+                            MemoryStream playerxmlstream = new MemoryStream();
+
+               //             doc.Save(playerxmlstream);
+
+
+                            var roster = (fantasy_content)serializer.Deserialize(new StringReader(response.Content.ToString()));
+
+                            _players.Add(roster.team.roster.players);
+
+                            for (int i = 0; i < _players[0].count; i++)
+                            {
+                                _roster.Add(_players[0].player[i]);
+                            }
+                            
+                            
+                                 string newjson = "", _playerKey = "";
+
+                        //    var s = new XmlSerializer(typeof(fantasy_content));
+ 
+                            
+
+                            //try
+                            //{
+
+                            //    newjson = JsonConvert.SerializeXNode(doc);
+
+                            //}
+
+                            //catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+
+                            //JObject o = JObject.Parse(newjson);
+
+                            //JArray ja = (JArray)o["fantasy_content"]["team"]["roster"]["players"]["player"];
+
+                            //for (int i = 0; i < ja.Count; i++)
+                            //{
+
+                            //    try
+                            //    {
+                            //        _roster.Add(JsonConvert.DeserializeObject<Player>(ja[i].ToString()));
+                            //    }
+
+                            //    catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+                            //}
+
+                        });
+            
                 }
 
+                return _roster; 
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+            //set
+            //{
+            //    if (_roster == value)
+            //    {
+            //        return;
+            //    }
 
-                RaisePropertyChanging(RosterPropertyName);
-                _roster = value;
-                RaisePropertyChanged(RosterPropertyName);
 
+            //    RaisePropertyChanging(RosterPropertyName);
+            //    _roster = value;
+            //    RaisePropertyChanged(RosterPropertyName);
+
+<<<<<<< HEAD
             }
         }
+=======
+            //}
+             
+            //get
+            //{
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
         public fantasy_contentTeamRosterPlayersPlayer SelectedPlayer
         {
@@ -307,6 +419,7 @@ namespace PhoneApp1.ViewModel
             }
 
 
+<<<<<<< HEAD
         }
 
 
@@ -337,6 +450,15 @@ namespace PhoneApp1.ViewModel
         }
 
 
+=======
+            //                });
+                    
+            //        return roster;
+            //    }
+            }
+     //   }
+        
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
         public ObservableCollection<Team> TeamList
         {

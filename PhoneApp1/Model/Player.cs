@@ -8,13 +8,117 @@ using System.Threading.Tasks;
 
 namespace PhoneApp1.Model
 {
+<<<<<<< HEAD
     public class StringObject 
     {
         public string StringValue { get; set; }
+=======
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng", IsNullable = false)]
+    public partial class fantasy_content
+    {
+
+        private fantasy_contentTeam teamField;
+
+        private string langField;
+
+        private string uriField;
+
+        private string timeField;
+
+        private string copyrightField;
+
+        private byte refresh_rateField;
+
+        /// <remarks/>
+        public fantasy_contentTeam team
+        {
+            get
+            {
+                return this.teamField;
+            }
+            set
+            {
+                this.teamField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(Form = System.Xml.Schema.XmlSchemaForm.Qualified, Namespace = "http://www.w3.org/XML/1998/namespace")]
+        public string lang
+        {
+            get
+            {
+                return this.langField;
+            }
+            set
+            {
+                this.langField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(Form = System.Xml.Schema.XmlSchemaForm.Qualified, Namespace = "http://www.yahooapis.com/v1/base.rng")]
+        public string uri
+        {
+            get
+            {
+                return this.uriField;
+            }
+            set
+            {
+                this.uriField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string time
+        {
+            get
+            {
+                return this.timeField;
+            }
+            set
+            {
+                this.timeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string copyright
+        {
+            get
+            {
+                return this.copyrightField;
+            }
+            set
+            {
+                this.copyrightField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public byte refresh_rate
+        {
+            get
+            {
+                return this.refresh_rateField;
+            }
+            set
+            {
+                this.refresh_rateField = value;
+            }
+        }
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+<<<<<<< HEAD
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng", IsNullable = false)]
     public partial class fantasy_content
     {
@@ -120,6 +224,11 @@ namespace PhoneApp1.Model
     public partial class fantasy_contentTeam
     {
 
+=======
+    public partial class fantasy_contentTeam
+    {
+
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
         private string team_keyField;
 
         private byte team_idField;
@@ -422,6 +531,7 @@ namespace PhoneApp1.Model
                 this.valueField = value;
             }
         }
+<<<<<<< HEAD
     }
 
     /// <remarks/>
@@ -951,6 +1061,748 @@ namespace PhoneApp1.Model
                 this.player_pointsField = value;
             }
         }
+=======
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+<<<<<<< HEAD
+    public partial class fantasy_contentTeamRosterPlayersPlayerName
+    {
+
+        private string fullField;
+
+        private string firstField;
+
+        private string lastField;
+
+        private string ascii_firstField;
+
+        private string ascii_lastField;
+
+        /// <remarks/>
+        public string full
+        {
+            get
+            {
+                return this.fullField;
+            }
+            set
+            {
+                this.fullField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string first
+        {
+            get
+            {
+                return this.firstField;
+            }
+            set
+            {
+                this.firstField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string last
+        {
+            get
+            {
+                return this.lastField;
+            }
+            set
+            {
+                this.lastField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string ascii_first
+        {
+            get
+            {
+                return this.ascii_firstField;
+            }
+            set
+            {
+                this.ascii_firstField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string ascii_last
+        {
+            get
+            {
+                return this.ascii_lastField;
+            }
+            set
+            {
+                this.ascii_lastField = value;
+=======
+    public partial class fantasy_contentTeamManagers
+    {
+
+        private fantasy_contentTeamManagersManager managerField;
+
+        /// <remarks/>
+        public fantasy_contentTeamManagersManager manager
+        {
+            get
+            {
+                return this.managerField;
+            }
+            set
+            {
+                this.managerField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+<<<<<<< HEAD
+    public partial class fantasy_contentTeamRosterPlayersPlayerBye_weeks
+    {
+
+        private byte weekField;
+
+        /// <remarks/>
+        public byte week
+        {
+            get
+            {
+                return this.weekField;
+            }
+            set
+            {
+                this.weekField = value;
+=======
+    public partial class fantasy_contentTeamManagersManager
+    {
+
+        private byte manager_idField;
+
+        private string nicknameField;
+
+        private string guidField;
+
+        private byte is_current_loginField;
+
+        /// <remarks/>
+        public byte manager_id
+        {
+            get
+            {
+                return this.manager_idField;
+            }
+            set
+            {
+                this.manager_idField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string nickname
+        {
+            get
+            {
+                return this.nicknameField;
+            }
+            set
+            {
+                this.nicknameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string guid
+        {
+            get
+            {
+                return this.guidField;
+            }
+            set
+            {
+                this.guidField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte is_current_login
+        {
+            get
+            {
+                return this.is_current_loginField;
+            }
+            set
+            {
+                this.is_current_loginField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+<<<<<<< HEAD
+    public partial class fantasy_contentTeamRosterPlayersPlayerHeadshot
+    {
+
+        private string urlField;
+
+        private string sizeField;
+
+        /// <remarks/>
+        public string url
+        {
+            get
+            {
+                return this.urlField;
+            }
+            set
+            {
+                this.urlField = value;
+=======
+    public partial class fantasy_contentTeamRoster
+    {
+
+        private string coverage_typeField;
+
+        private byte weekField;
+
+        private fantasy_contentTeamRosterPlayers playersField;
+
+        /// <remarks/>
+        public string coverage_type
+        {
+            get
+            {
+                return this.coverage_typeField;
+            }
+            set
+            {
+                this.coverage_typeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte week
+        {
+            get
+            {
+                return this.weekField;
+            }
+            set
+            {
+                this.weekField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+
+        /// <remarks/>
+<<<<<<< HEAD
+        public string size
+        {
+            get
+            {
+                return this.sizeField;
+            }
+            set
+            {
+                this.sizeField = value;
+=======
+        public fantasy_contentTeamRosterPlayers players
+        {
+            get
+            {
+                return this.playersField;
+            }
+            set
+            {
+                this.playersField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+<<<<<<< HEAD
+    public partial class fantasy_contentTeamRosterPlayersPlayerSelected_position
+    {
+
+        private string coverage_typeField;
+
+        private byte weekField;
+
+        private string positionField;
+
+        /// <remarks/>
+        public string coverage_type
+        {
+            get
+            {
+                return this.coverage_typeField;
+            }
+            set
+            {
+                this.coverage_typeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte week
+        {
+            get
+            {
+                return this.weekField;
+            }
+            set
+            {
+                this.weekField = value;
+=======
+    public partial class fantasy_contentTeamRosterPlayers
+    {
+
+        private fantasy_contentTeamRosterPlayersPlayer[] playerField;
+
+        private byte countField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("player")]
+        public fantasy_contentTeamRosterPlayersPlayer[] player
+        {
+            get
+            {
+                return this.playerField;
+            }
+            set
+            {
+                this.playerField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+
+        /// <remarks/>
+<<<<<<< HEAD
+        public string position
+        {
+            get
+            {
+                return this.positionField;
+            }
+            set
+            {
+                this.positionField = value;
+=======
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public byte count
+        {
+            get
+            {
+                return this.countField;
+            }
+            set
+            {
+                this.countField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+<<<<<<< HEAD
+    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_stats : INotifyPropertyChanged
+    {
+
+        public event PropertyChangedEventHandler PropertyChanged; 
+
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+
+
+                PropertyChanged(this,
+
+
+                    new PropertyChangedEventArgs(propertyName));
+            }
+        } 
+
+
+        private string coverage_typeField;
+
+        private byte weekField;
+
+        private ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> statsField;
+
+        /// <remarks/>
+        public string coverage_type
+        {
+            get
+            {
+                return this.coverage_typeField;
+            }
+            set
+            {
+                this.coverage_typeField = value;
+=======
+    public partial class fantasy_contentTeamRosterPlayersPlayer
+    {
+
+        private string player_keyField;
+
+        private uint player_idField;
+
+        private fantasy_contentTeamRosterPlayersPlayerName nameField;
+
+        private string statusField;
+
+        private string editorial_player_keyField;
+
+        private string editorial_team_keyField;
+
+        private string editorial_team_full_nameField;
+
+        private string editorial_team_abbrField;
+
+        private fantasy_contentTeamRosterPlayersPlayerBye_weeks bye_weeksField;
+
+        private string uniform_numberField;
+
+        private string display_positionField;
+
+        private fantasy_contentTeamRosterPlayersPlayerHeadshot headshotField;
+
+        private string image_urlField;
+
+        private byte is_undroppableField;
+
+        private string position_typeField;
+
+        private string[] eligible_positionsField;
+
+        private byte has_player_notesField;
+
+        private bool has_player_notesFieldSpecified;
+
+        private fantasy_contentTeamRosterPlayersPlayerSelected_position selected_positionField;
+
+        private fantasy_contentTeamRosterPlayersPlayerPlayer_stats player_statsField;
+
+        private fantasy_contentTeamRosterPlayersPlayerPlayer_points player_pointsField;
+
+        /// <remarks/>
+        public string player_key
+        {
+            get
+            {
+                return this.player_keyField;
+            }
+            set
+            {
+                this.player_keyField = value;
+            }
+        }
+
+        /// <remarks/>
+        public uint player_id
+        {
+            get
+            {
+                return this.player_idField;
+            }
+            set
+            {
+                this.player_idField = value;
+            }
+        }
+
+        /// <remarks/>
+        public fantasy_contentTeamRosterPlayersPlayerName name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string editorial_player_key
+        {
+            get
+            {
+                return this.editorial_player_keyField;
+            }
+            set
+            {
+                this.editorial_player_keyField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string editorial_team_key
+        {
+            get
+            {
+                return this.editorial_team_keyField;
+            }
+            set
+            {
+                this.editorial_team_keyField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string editorial_team_full_name
+        {
+            get
+            {
+                return this.editorial_team_full_nameField;
+            }
+            set
+            {
+                this.editorial_team_full_nameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string editorial_team_abbr
+        {
+            get
+            {
+                return this.editorial_team_abbrField;
+            }
+            set
+            {
+                this.editorial_team_abbrField = value;
+            }
+        }
+
+        /// <remarks/>
+        public fantasy_contentTeamRosterPlayersPlayerBye_weeks bye_weeks
+        {
+            get
+            {
+                return this.bye_weeksField;
+            }
+            set
+            {
+                this.bye_weeksField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string uniform_number
+        {
+            get
+            {
+                return this.uniform_numberField;
+            }
+            set
+            {
+                this.uniform_numberField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+
+        /// <remarks/>
+<<<<<<< HEAD
+        public byte week
+        {
+            get
+            {
+                return this.weekField;
+            }
+            set
+            {
+                this.weekField = value;
+=======
+        public string display_position
+        {
+            get
+            {
+                return this.display_positionField;
+            }
+            set
+            {
+                this.display_positionField = value;
+            }
+        }
+
+        /// <remarks/>
+        public fantasy_contentTeamRosterPlayersPlayerHeadshot headshot
+        {
+            get
+            {
+                return this.headshotField;
+            }
+            set
+            {
+                this.headshotField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string image_url
+        {
+            get
+            {
+                return this.image_urlField;
+            }
+            set
+            {
+                this.image_urlField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte is_undroppable
+        {
+            get
+            {
+                return this.is_undroppableField;
+            }
+            set
+            {
+                this.is_undroppableField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
+            }
+        }
+
+        /// <remarks/>
+<<<<<<< HEAD
+        [System.Xml.Serialization.XmlArrayItemAttribute("stat", IsNullable = false)]
+        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> stats
+        {
+            get
+            {
+                return this.statsField;
+            }
+            set
+            {
+
+                this.statsField = value;
+                OnPropertyChanged("stats");
+                
+=======
+        public string position_type
+        {
+            get
+            {
+                return this.position_typeField;
+            }
+            set
+            {
+                this.position_typeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("position", IsNullable = false)]
+        public string[] eligible_positions
+        {
+            get
+            {
+                return this.eligible_positionsField;
+            }
+            set
+            {
+                this.eligible_positionsField = value;
+            }
+        }
+
+        /// <remarks/>
+        public byte has_player_notes
+        {
+            get
+            {
+                return this.has_player_notesField;
+            }
+            set
+            {
+                this.has_player_notesField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool has_player_notesSpecified
+        {
+            get
+            {
+                return this.has_player_notesFieldSpecified;
+            }
+            set
+            {
+                this.has_player_notesFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public fantasy_contentTeamRosterPlayersPlayerSelected_position selected_position
+        {
+            get
+            {
+                return this.selected_positionField;
+            }
+            set
+            {
+                this.selected_positionField = value;
+            }
+        }
+
+        /// <remarks/>
+        public fantasy_contentTeamRosterPlayersPlayerPlayer_stats player_stats
+        {
+            get
+            {
+                return this.player_statsField;
+            }
+            set
+            {
+                this.player_statsField = value;
+            }
+        }
+
+        /// <remarks/>
+        public fantasy_contentTeamRosterPlayersPlayerPlayer_points player_points
+        {
+            get
+            {
+                return this.player_pointsField;
+            }
+            set
+            {
+                this.player_pointsField = value;
+            }
+        }
     }
 
     /// <remarks/>
@@ -1051,12 +1903,32 @@ namespace PhoneApp1.Model
             set
             {
                 this.weekField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
             }
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
+<<<<<<< HEAD
+    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat
+    {
+
+        private byte stat_idField;
+
+        private decimal valueField;
+
+        /// <remarks/>
+        public byte stat_id
+        {
+            get
+            {
+                return this.stat_idField;
+            }
+            set
+            {
+                this.stat_idField = value;
+=======
     public partial class fantasy_contentTeamRosterPlayersPlayerHeadshot
     {
 
@@ -1074,10 +1946,22 @@ namespace PhoneApp1.Model
             set
             {
                 this.urlField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
             }
         }
 
         /// <remarks/>
+<<<<<<< HEAD
+        public decimal value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+=======
         public string size
         {
             get
@@ -1138,37 +2022,29 @@ namespace PhoneApp1.Model
             set
             {
                 this.positionField = value;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
             }
         }
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_stats : INotifyPropertyChanged
+<<<<<<< HEAD
+    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_points
+=======
+    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_stats
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
     {
-
-        public event PropertyChangedEventHandler PropertyChanged; 
-
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-
-
-                PropertyChanged(this,
-
-
-                    new PropertyChangedEventArgs(propertyName));
-            }
-        } 
-
 
         private string coverage_typeField;
 
         private byte weekField;
 
-        private ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> statsField;
+<<<<<<< HEAD
+        private decimal totalField;
+=======
+        private fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[] statsField;
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
         /// <remarks/>
         public string coverage_type
@@ -1197,8 +2073,19 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
+<<<<<<< HEAD
+        public decimal total
+        {
+            get
+            {
+                return this.totalField;
+            }
+            set
+            {
+                this.totalField = value;
+=======
         [System.Xml.Serialization.XmlArrayItemAttribute("stat", IsNullable = false)]
-        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> stats
+        public fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[] stats
         {
             get
             {
@@ -1206,14 +2093,14 @@ namespace PhoneApp1.Model
             }
             set
             {
-
                 this.statsField = value;
-                OnPropertyChanged("stats");
-                
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
             }
         }
     }
 
+<<<<<<< HEAD
+=======
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
     public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat
@@ -1301,6 +2188,7 @@ namespace PhoneApp1.Model
         }
     }
 
+>>>>>>> cb14e5aa29260e69b6ebe00ed58d7d605cd59d28
 
 }
 
