@@ -831,7 +831,7 @@ namespace PhoneApp1.Model
             {
                 string _largeImage = this.image_urlField;
 
-                if (_largeImage.IndexOf("--/http")>0)
+                if (this.image_urlField !=null && _largeImage.IndexOf("--/http")>0)
                 {
                     _largeImage = _largeImage.Substring(_largeImage.IndexOf("--/http")+3);
                 }

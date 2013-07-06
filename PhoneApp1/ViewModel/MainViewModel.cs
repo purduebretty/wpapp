@@ -14,6 +14,7 @@ using System.IO.IsolatedStorage;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -278,6 +279,8 @@ namespace PhoneApp1.ViewModel
                     }
                     _eligiblePositions.Add(new StringObject { StringValue = "BN" });
                 }
+                    _currentPosition = _selectedPlayer.selected_position.position.ToString();
+                
 
             }
 
@@ -375,7 +378,7 @@ namespace PhoneApp1.ViewModel
 
                 fantasy_contentTeamRosterPlayersPlayer _playerToUpdate = new fantasy_contentTeamRosterPlayersPlayer();
                 _playerToUpdate.player_key = _selectedPlayer.player_key;
-                _playerToUpdate.selected_position.position = _currentPosition;
+                _playerToUpdate.selected_position.position = _selectedPlayer.selected_position.position;
                     
                 MemoryStream playerxmlstream = new MemoryStream();
                 serializer.Serialize(playerxmlstream, _playerToUpdate);
@@ -417,7 +420,83 @@ namespace PhoneApp1.ViewModel
         }
         public void Save()
         {
-            MessageBox.Show("test");
+         //   MessageBox.Show("test");
+
+
+            string _teamKey = (string)appSettings["teamKey"];
+            string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+            var request = new RestRequest(String.Format(("team/{0}/roster"), _teamKey), Method.PUT); //changed 'roster' to 'stats;type=week;week=current'
+            request.AddHeader("Content-Type", "application/xml");
+            
+
+            XDocument doc = new XDocument();
+
+            //StringWriter sww = new StringWriter();
+            //XmlWriter writer = XmlWriter.Create(sww);
+
+            //writer.WriteStartDocument();
+            //writer.WriteStartElement("fantasy_content");
+
+            //writer.WriteStartElement("roster");
+            //writer.WriteStartElement("coverage_type");
+            //writer.WriteString("week");
+            //writer.WriteEndElement();
+
+            //writer.WriteStartElement("week");
+            //writer.WriteString("17");
+            //writer.WriteEndElement();
+
+            //writer.WriteStartElement("players");
+            //writer.WriteStartElement("player");
+            //writer.WriteStartElement("player_key");
+            //writer.WriteString(_teamKey);
+            //writer.WriteEndElement();
+
+            //writer.WriteStartElement("position");
+            //writer.WriteString(_currentPosition);
+            //writer.WriteEndElement();
+
+            //writer.WriteEndElement();
+            //writer.WriteEndElement();
+            //writer.WriteEndElement();
+            //writer.WriteEndElement();
+
+            //writer.WriteEndDocument();
+
+            //request.AddBody(sww.ToString());
+
+
+            request.XmlSerializer.ContentType = "application/xml";
+            request.RequestFormat = DataFormat.Xml;
+
+
+
+            XmlSerializer serializer = new XmlSerializer(typeof(fantasy_contentTeamRosterPlayersPlayer));
+            request.XmlSerializer.ContentType = "application/xml";
+
+            fantasy_contentTeamRosterPlayersPlayer _playerToUpdate = new fantasy_contentTeamRosterPlayersPlayer();
+            _playerToUpdate.player_key = _selectedPlayer.player_key;
+            _playerToUpdate.selected_position = new fantasy_contentTeamRosterPlayersPlayerSelected_position();
+            _playerToUpdate.selected_position.position = _currentPosition;
+
+            StringWriter sww = new StringWriter();
+            XmlWriter writer = XmlWriter.Create(sww);
+
+            serializer.Serialize(writer, _playerToUpdate);
+
+            request.AddBody(sww.ToString());
+
+
+
+
+            client.ExecuteAsync(request, response =>
+            {
+
+                MessageBox.Show(response.Content.ToString());
+
+
+            });
+
         }
         public bool CanSave()
         {

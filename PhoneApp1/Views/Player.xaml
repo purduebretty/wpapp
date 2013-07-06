@@ -54,7 +54,7 @@
             </Grid>
 
 
-            <ListBox x:Name="PositionListBox" Grid.Row="2" SelectedItem="{Binding CurrentPosition, Mode=TwoWay}" ItemsSource="{Binding EligiblePositions}" d:IsHidden="True">
+            <ListBox x:Name="PositionListBox" Grid.Row="2" SelectedItem="{Binding CurrentPosition.StringValue, Mode=TwoWay}" ItemsSource="{Binding EligiblePositions}" d:IsHidden="True">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/> 
