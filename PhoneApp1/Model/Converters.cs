@@ -42,4 +42,28 @@ namespace PhoneApp1.Model
         }
     }
 
+    public class StatConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
+        {
+            //foreach (var item in value)
+            //{
+            //    if (item.stat_id == 4)
+            //    {
+            //        return value;
+            //    }
+
+            //}
+            return true;
+
+        }
+
+        public object ConvertBack(object value, Type targetType,
+            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
 }

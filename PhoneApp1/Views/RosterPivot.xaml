@@ -19,6 +19,7 @@
     <phone:PhoneApplicationPage.Resources>
         <l:OffenseVisibility x:Name="ShowOffense"/>
         <l:BenchColor x:Name="DisableBenchColor"/>
+        <l:StatConverter x:Name="ConvertedStat"/>
     </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -108,7 +109,7 @@
                                         <ColumnDefinition Width="50"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding name.full}" Grid.Column="0" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }" />
-                                    <TextBlock Text="{Binding player_stats.stats.stat.stat_id}" Grid.Column="1" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }"/>
+                                    <TextBlock Text="{Binding player_stats.stats[0].stat_id}" Grid.Column="1" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }"/>
                                     <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }"/>
                                     <TextBlock Text="{Binding player_points.total}" Grid.Column="3" Visibility="{Binding position_type, Converter={StaticResource ShowOffense} }"/>
 

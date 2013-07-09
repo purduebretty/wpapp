@@ -285,7 +285,7 @@ namespace PhoneApp1.ViewModel
                     }
                     _eligiblePositions.Add(new StringObject { StringValue = "BN" });
                 }
-                    _currentPosition = _selectedPlayer.selected_position.position.ToString();
+         //           _currentPosition = _selectedPlayer.selected_position.position.ToString();
                 
 
             }
@@ -339,7 +339,7 @@ namespace PhoneApp1.ViewModel
                 RaisePropertyChanged(CurrentPositionPropertyName);
                 _selectedPlayer.selected_position.position = _currentPosition;
 
-                //                _selectedPlayer.selected_position = _eligiblePositions.se
+                     //           _selectedPlayer.selected_position = _eligiblePositions.se
             }
 
 
@@ -362,9 +362,9 @@ namespace PhoneApp1.ViewModel
                 {
                     return;
                 }
-                RaisePropertyChanging("SelectedTeam");
-                _selectedTeam = value;
-                RaisePropertyChanged("SelectedTeam");
+            //    RaisePropertyChanging("SelectedTeam");
+            //    _selectedTeam = value;
+            //    RaisePropertyChanged("SelectedTeam");
             }
         }
 

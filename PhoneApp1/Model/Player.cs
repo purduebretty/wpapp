@@ -619,28 +619,7 @@ namespace PhoneApp1.Model
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
     public partial class Player
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-
-
-            if (PropertyChanged != null)
-            {
-
-
-                PropertyChanged(this,
-
-
-                    new PropertyChangedEventArgs(propertyName));
-
-
-            }
-
-        } 
-
-
+  
         private string player_keyField;
 
         private uint player_idField;
@@ -679,7 +658,7 @@ namespace PhoneApp1.Model
 
         private Selected_position selected_positionField;
 
-        private ObservableCollection<Player_stats> player_statsField;
+        private Player_stats player_statsField;
 
         private Player_points player_pointsField;
 
@@ -940,7 +919,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public ObservableCollection<Player_stats> player_stats
+        public Player_stats player_stats
         {
             get
             {
@@ -949,7 +928,6 @@ namespace PhoneApp1.Model
             set
             {
                 this.player_statsField = value;
-                OnPropertyChanged("player_stats");
                 
             }
         }
@@ -1159,31 +1137,13 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class Player_stats : INotifyPropertyChanged
+    public partial class Player_stats 
     {
-
-        public event PropertyChangedEventHandler PropertyChanged; 
-
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-
-
-                PropertyChanged(this,
-
-
-                    new PropertyChangedEventArgs(propertyName));
-            }
-        } 
-
-
         private string coverage_typeField;
 
         private byte weekField;
 
-        private ObservableCollection<Stat[]> statsField;
+        private ObservableCollection<Stat> statsField;
 
         /// <remarks/>
         public string coverage_type
@@ -1213,7 +1173,7 @@ namespace PhoneApp1.Model
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("stat", IsNullable = false)]
-        public ObservableCollection<Stat[]> stats
+        public ObservableCollection<Stat> stats
         {
             get
             {
@@ -1223,8 +1183,11 @@ namespace PhoneApp1.Model
             {
 
                 this.statsField = value;
-                OnPropertyChanged("stats");
-                
+
+                //RaisePropertyChanging("stats);
+                //this.statsField = value;
+                //RaisePropertyChanged("stats);
+
             }
         }
     }
@@ -1234,12 +1197,12 @@ namespace PhoneApp1.Model
     public partial class Stat
     {
 
-        private byte stat_idField;
+        private string stat_idField;
 
         private decimal valueField;
 
         /// <remarks/>
-        public byte stat_id
+        public string stat_id
         {
             get
             {
