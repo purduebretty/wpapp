@@ -19,7 +19,7 @@ namespace PhoneApp1.Model
     public partial class fantasy_content
     {
 
-        private fantasy_contentTeam teamField;
+        private Team teamField;
 
         private string langField;
 
@@ -31,8 +31,10 @@ namespace PhoneApp1.Model
 
         private byte refresh_rateField;
 
+        private Roster rosterField;
+
         /// <remarks/>
-        public fantasy_contentTeam team
+        public Team team
         {
             get
             {
@@ -113,11 +115,24 @@ namespace PhoneApp1.Model
                 this.refresh_rateField = value;
             }
         }
+
+        public Roster roster
+        {
+            get
+            {
+                return this.rosterField;
+            }
+            set
+            {
+                this.rosterField = value;
+            }
+        }
+
     }
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeam
+    public partial class Team
     {
 
         private string team_keyField;
@@ -130,21 +145,21 @@ namespace PhoneApp1.Model
 
         private string urlField;
 
-        private fantasy_contentTeamTeam_logos team_logosField;
+        private Team_logos team_logosField;
 
-        private byte waiver_priorityField;
+        private string waiver_priorityField;
 
         private byte number_of_movesField;
 
         private byte number_of_tradesField;
 
-        private fantasy_contentTeamRoster_adds roster_addsField;
+        private Roster_adds roster_addsField;
 
         private byte clinched_playoffsField;
 
-        private fantasy_contentTeamManagers managersField;
+        private Managers managersField;
 
-        private fantasy_contentTeamRoster rosterField;
+        private Roster rosterField;
 
         /// <remarks/>
         public string team_key
@@ -212,7 +227,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamTeam_logos team_logos
+        public Team_logos team_logos
         {
             get
             {
@@ -225,7 +240,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public byte waiver_priority
+        public string waiver_priority
         {
             get
             {
@@ -264,7 +279,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRoster_adds roster_adds
+        public Roster_adds roster_adds
         {
             get
             {
@@ -290,7 +305,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamManagers managers
+        public Managers managers
         {
             get
             {
@@ -303,7 +318,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRoster roster
+        public Roster roster
         {
             get
             {
@@ -318,13 +333,13 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamTeam_logos
+    public partial class Team_logos
     {
 
-        private fantasy_contentTeamTeam_logosTeam_logo team_logoField;
+        private Team_logo team_logoField;
 
         /// <remarks/>
-        public fantasy_contentTeamTeam_logosTeam_logo team_logo
+        public Team_logo team_logo
         {
             get
             {
@@ -339,7 +354,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamTeam_logosTeam_logo
+    public partial class Team_logo
     {
 
         private string sizeField;
@@ -375,7 +390,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRoster_adds
+    public partial class Roster_adds
     {
 
         private string coverage_typeField;
@@ -426,13 +441,13 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamManagers
+    public partial class Managers
     {
 
-        private fantasy_contentTeamManagersManager managerField;
+        private Manager managerField;
 
         /// <remarks/>
-        public fantasy_contentTeamManagersManager manager
+        public Manager manager
         {
             get
             {
@@ -447,7 +462,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamManagersManager
+    public partial class Manager
     {
 
         private byte manager_idField;
@@ -513,14 +528,14 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRoster
+    public partial class Roster
     {
 
         private string coverage_typeField;
 
         private byte weekField;
 
-        private fantasy_contentTeamRosterPlayers playersField;
+        private Players playersField;
 
         /// <remarks/>
         public string coverage_type
@@ -549,7 +564,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRosterPlayers players
+        public Players players
         {
             get
             {
@@ -564,16 +579,16 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayers
+    public partial class Players
     {
 
-        private fantasy_contentTeamRosterPlayersPlayer[] playerField;
+        private Player[] playerField;
 
         private byte countField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("player")]
-        public fantasy_contentTeamRosterPlayersPlayer[] player
+        public Player[] player
         {
             get
             {
@@ -602,7 +617,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayer
+    public partial class Player
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -630,7 +645,7 @@ namespace PhoneApp1.Model
 
         private uint player_idField;
 
-        private fantasy_contentTeamRosterPlayersPlayerName nameField;
+        private Name nameField;
 
         private string statusField;
 
@@ -642,13 +657,13 @@ namespace PhoneApp1.Model
 
         private string editorial_team_abbrField;
 
-        private fantasy_contentTeamRosterPlayersPlayerBye_weeks bye_weeksField;
+        private Bye_weeks bye_weeksField;
 
         private string uniform_numberField;
 
         private string display_positionField;
 
-        private fantasy_contentTeamRosterPlayersPlayerHeadshot headshotField;
+        private Headshot headshotField;
 
         private string image_urlField;
 
@@ -662,11 +677,11 @@ namespace PhoneApp1.Model
 
         private bool has_player_notesFieldSpecified;
 
-        private fantasy_contentTeamRosterPlayersPlayerSelected_position selected_positionField;
+        private Selected_position selected_positionField;
 
-        private ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_stats> player_statsField;
+        private ObservableCollection<Player_stats> player_statsField;
 
-        private fantasy_contentTeamRosterPlayersPlayerPlayer_points player_pointsField;
+        private Player_points player_pointsField;
 
         /// <remarks/>
         public string player_key
@@ -695,7 +710,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRosterPlayersPlayerName name
+        public Name name
         {
             get
             {
@@ -773,7 +788,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRosterPlayersPlayerBye_weeks bye_weeks
+        public Bye_weeks bye_weeks
         {
             get
             {
@@ -812,7 +827,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRosterPlayersPlayerHeadshot headshot
+        public Headshot headshot
         {
             get
             {
@@ -912,7 +927,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRosterPlayersPlayerSelected_position selected_position
+        public Selected_position selected_position
         {
             get
             {
@@ -925,7 +940,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_stats> player_stats
+        public ObservableCollection<Player_stats> player_stats
         {
             get
             {
@@ -940,7 +955,7 @@ namespace PhoneApp1.Model
         }
 
         /// <remarks/>
-        public fantasy_contentTeamRosterPlayersPlayerPlayer_points player_points
+        public Player_points player_points
         {
             get
             {
@@ -955,7 +970,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerName
+    public partial class Name
     {
 
         private string fullField;
@@ -1036,7 +1051,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerBye_weeks
+    public partial class Bye_weeks
     {
 
         private byte weekField;
@@ -1057,7 +1072,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerHeadshot
+    public partial class Headshot
     {
 
         private string urlField;
@@ -1093,7 +1108,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerSelected_position
+    public partial class Selected_position
     {
 
         private string coverage_typeField;
@@ -1144,7 +1159,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_stats : INotifyPropertyChanged
+    public partial class Player_stats : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged; 
@@ -1168,7 +1183,7 @@ namespace PhoneApp1.Model
 
         private byte weekField;
 
-        private ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> statsField;
+        private ObservableCollection<Stat[]> statsField;
 
         /// <remarks/>
         public string coverage_type
@@ -1198,7 +1213,7 @@ namespace PhoneApp1.Model
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("stat", IsNullable = false)]
-        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat[]> stats
+        public ObservableCollection<Stat[]> stats
         {
             get
             {
@@ -1216,7 +1231,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_statsStat
+    public partial class Stat
     {
 
         private byte stat_idField;
@@ -1252,7 +1267,7 @@ namespace PhoneApp1.Model
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://fantasysports.yahooapis.com/fantasy/v2/base.rng")]
-    public partial class fantasy_contentTeamRosterPlayersPlayerPlayer_points
+    public partial class Player_points
     {
 
         private string coverage_typeField;

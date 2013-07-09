@@ -11,6 +11,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Net;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -38,15 +40,17 @@ namespace PhoneApp1.ViewModel
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
+       
 
-        ObservableCollection<Game> games = new ObservableCollection<Game>();
+
+      //  ObservableCollection<Game> games = new ObservableCollection<Game>();
         ObservableCollection<StringObject> _eligiblePositions = new ObservableCollection<StringObject>();
         ObservableCollection<Team> teams = new ObservableCollection<Team>();
-        ObservableCollection<fantasy_contentTeamRosterPlayers> _players = new ObservableCollection<fantasy_contentTeamRosterPlayers>();
-        ObservableCollection<fantasy_contentTeamRosterPlayersPlayer> _roster = new ObservableCollection<fantasy_contentTeamRosterPlayersPlayer>();
+        ObservableCollection<Players> _players = new ObservableCollection<Players>();
+        ObservableCollection<Player> _roster = new ObservableCollection<Player>();
 
         private Team _selectedTeam = null;
-        public fantasy_contentTeamRosterPlayersPlayer _selectedPlayer = new fantasy_contentTeamRosterPlayersPlayer();
+        public Player _selectedPlayer = new Player();
         private string _currentPosition = string.Empty;
         public const string RosterPropertyName = "Roster";
         public const string SelectedPlayerPropertyName = "SelectedPlayer";
@@ -79,9 +83,9 @@ namespace PhoneApp1.ViewModel
             {
 
 
-                teams.Add(new Team { name = "Foster the Arian People" });
+            //    teams.Add(new JObject { name = "Foster the Arian People" });
 
-                //_roster.Add(new fantasy_contentTeamRosterPlayersPlayer {editorial_team_abbr = "SEA"}) ;
+                //_roster.Add(new Player {editorial_team_abbr = "SEA"}) ;
 
 
                 //              _roster.Add(new Player { name = { full = "Bobby Bouche" } });
@@ -125,7 +129,7 @@ namespace PhoneApp1.ViewModel
                                 if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] == 1)
                                 {
                                     JObject _game = (JObject)o["fantasy_content"]["users"]["user"]["games"]["game"];
-                                    games.Add(JsonConvert.DeserializeObject<Game>(_game.ToString()));
+        //                            games.Add(JsonConvert.DeserializeObject<Game>(_game.ToString()));
 
                                     if ((int)_game["teams"]["@count"] == 1)
                                     {
@@ -137,7 +141,7 @@ namespace PhoneApp1.ViewModel
 
                                         for (int i = 0; i < _teams.Count; i++)
                                         {
-                                            _teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
+                                            teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
                                         }
                                     }
 
@@ -150,11 +154,13 @@ namespace PhoneApp1.ViewModel
 
                                     for (int i = 0; i < o.Count; i++)
                                     {
-                                        games.Add(JsonConvert.DeserializeObject<Game>(_games[i].ToString()));
+          //                              games.Add(JsonConvert.DeserializeObject<Game>(_games[i].ToString()));
 
                                         if ((int)_games[i]["teams"]["@count"] == 1)
                                         {
-                                            teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"].ToString()));
+                                            Team _team = JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"].ToString());
+
+                                            teams.Add(_team);
                                         }
                                         if ((int)_games[i]["teams"]["@count"] > 1)
                                         {
@@ -162,7 +168,7 @@ namespace PhoneApp1.ViewModel
 
                                             for (int j = 0; j < _teams.Count; i++)
                                             {
-                                                _teams.Add(JsonConvert.DeserializeObject<Team>((string)_games[i]["teams"]["team"][j]));
+                                                teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"][j].ToString()));
                                             }
                                         }
 
@@ -195,7 +201,7 @@ namespace PhoneApp1.ViewModel
         }
 
 
-        public ObservableCollection<fantasy_contentTeamRosterPlayersPlayer> Roster
+        public ObservableCollection<Player> Roster
         {
 
             get
@@ -249,7 +255,7 @@ namespace PhoneApp1.ViewModel
             }
         }
 
-        public fantasy_contentTeamRosterPlayersPlayer SelectedPlayer
+        public Player SelectedPlayer
         {
             get
             {
@@ -374,9 +380,9 @@ namespace PhoneApp1.ViewModel
 
             
                 XDocument doc = new XDocument();
-                XmlSerializer serializer = new XmlSerializer(typeof(fantasy_contentTeamRosterPlayersPlayer));
+                XmlSerializer serializer = new XmlSerializer(typeof(Player));
 
-                fantasy_contentTeamRosterPlayersPlayer _playerToUpdate = new fantasy_contentTeamRosterPlayersPlayer();
+                Player _playerToUpdate = new Player();
                 _playerToUpdate.player_key = _selectedPlayer.player_key;
                 _playerToUpdate.selected_position.position = _selectedPlayer.selected_position.position;
                     
@@ -420,81 +426,48 @@ namespace PhoneApp1.ViewModel
         }
         public void Save()
         {
-         //   MessageBox.Show("test");
-
 
             string _teamKey = (string)appSettings["teamKey"];
             string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+
             var request = new RestRequest(String.Format(("team/{0}/roster"), _teamKey), Method.PUT); //changed 'roster' to 'stats;type=week;week=current'
-            request.AddHeader("Content-Type", "application/xml");
             
-
-            XDocument doc = new XDocument();
-
-            //StringWriter sww = new StringWriter();
-            //XmlWriter writer = XmlWriter.Create(sww);
-
-            //writer.WriteStartDocument();
-            //writer.WriteStartElement("fantasy_content");
-
-            //writer.WriteStartElement("roster");
-            //writer.WriteStartElement("coverage_type");
-            //writer.WriteString("week");
-            //writer.WriteEndElement();
-
-            //writer.WriteStartElement("week");
-            //writer.WriteString("17");
-            //writer.WriteEndElement();
-
-            //writer.WriteStartElement("players");
-            //writer.WriteStartElement("player");
-            //writer.WriteStartElement("player_key");
-            //writer.WriteString(_teamKey);
-            //writer.WriteEndElement();
-
-            //writer.WriteStartElement("position");
-            //writer.WriteString(_currentPosition);
-            //writer.WriteEndElement();
-
-            //writer.WriteEndElement();
-            //writer.WriteEndElement();
-            //writer.WriteEndElement();
-            //writer.WriteEndElement();
-
-            //writer.WriteEndDocument();
-
-            //request.AddBody(sww.ToString());
-
-
-            request.XmlSerializer.ContentType = "application/xml";
-            request.RequestFormat = DataFormat.Xml;
-
-
-
-            XmlSerializer serializer = new XmlSerializer(typeof(fantasy_contentTeamRosterPlayersPlayer));
-            request.XmlSerializer.ContentType = "application/xml";
-
-            fantasy_contentTeamRosterPlayersPlayer _playerToUpdate = new fantasy_contentTeamRosterPlayersPlayer();
-            _playerToUpdate.player_key = _selectedPlayer.player_key;
-            _playerToUpdate.selected_position = new fantasy_contentTeamRosterPlayersPlayerSelected_position();
-            _playerToUpdate.selected_position.position = _currentPosition;
-
             StringWriter sww = new StringWriter();
-            XmlWriter writer = XmlWriter.Create(sww);
-
-            serializer.Serialize(writer, _playerToUpdate);
-
-            request.AddBody(sww.ToString());
-
-
-
-
-            client.ExecuteAsync(request, response =>
+      
+            using (XmlWriter writer = XmlWriter.Create(sww))
             {
 
+                writer.WriteStartDocument();
+                writer.WriteStartElement("fantasy_content");
+
+                writer.WriteStartElement("roster");
+                writer.WriteElementString("coverage_type", "week");
+
+                writer.WriteElementString("week", "17");
+
+                writer.WriteStartElement("players");
+                writer.WriteStartElement("player");
+                writer.WriteElementString("player_key", _selectedPlayer.player_key);
+
+                writer.WriteElementString("position", _currentPosition);
+
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+
+                writer.WriteEndDocument();
+              writer.Flush();
+           
+            }
+
+           XDocument doc = XDocument.Parse(sww.ToString());
+            
+          request.AddParameter("application/xml",doc , ParameterType.RequestBody);
+      
+            client.ExecuteAsync(request, response =>
+            {
                 MessageBox.Show(response.Content.ToString());
-
-
             });
 
         }
