@@ -48,21 +48,21 @@ namespace PhoneApp1
             accessTokenSecret = MainUtil.GetKeyValue<string>("AccessTokenSecret");
             
 
-            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
-            int seconds = (int)t.TotalSeconds;
-            var timestampcheck =  MainUtil.GetKeyValue<string>("Timestamp");
-            double duration = seconds - Convert.ToDouble(MainUtil.GetKeyValue<string>("Timestamp"));
+            //TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            //int seconds = (int)t.TotalSeconds;
+            //var timestampcheck =  MainUtil.GetKeyValue<string>("Timestamp");
+            //double duration = seconds - Convert.ToDouble(MainUtil.GetKeyValue<string>("Timestamp"));
 
-            if (duration > 3500)
-            {
-               SignOut();
+            //if (duration > 3500)
+            //{
+            // //  SignOut();
 
-                //var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
-                //RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
+            //    var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
+            //    RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
 
-                //RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
+            //    RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
                
-            }
+            //}
 
             if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(accessTokenSecret))
             {
@@ -77,6 +77,24 @@ namespace PhoneApp1
 
         private void userLoggedIn()
         {
+            //moved from is user login
+            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            int seconds = (int)t.TotalSeconds;
+            var timestampcheck = MainUtil.GetKeyValue<string>("Timestamp");
+            double duration = seconds - Convert.ToDouble(MainUtil.GetKeyValue<string>("Timestamp"));
+
+            if (duration > 3500)
+            {
+                //  SignOut();
+
+                var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
+                RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
+
+                RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
+
+            }
+            //end
+
             Dispatcher.BeginInvoke(() =>
             {
                 var SignInMenuItem = (Microsoft.Phone.Shell.ApplicationBarMenuItem)this.ApplicationBar.MenuItems[0];
@@ -90,17 +108,17 @@ namespace PhoneApp1
 
                 IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
-                    NavigationService.Navigate(new Uri("/Views/LeagueSelect.xaml", UriKind.Relative));
-                
+                NavigationService.Navigate(new Uri("/Views/LeagueSelect.xaml", UriKind.Relative));
 
 
-                //if ((string)appSettings["teamKey"] == "" || (string)appSettings["teamKey"] == null)
+
+                //if ( ((string)appSettings["teamKey"] == "" || (string)appSettings["teamKey"] == null))
                 //{
-                //    NavigationService.Navigate(new Uri("/LeagueSelect.xaml", UriKind.Relative));
+                //    NavigationService.Navigate(new Uri("/Views/LeagueSelect.xaml", UriKind.Relative));
                 //}
                 //else
                 //{
-                //    NavigationService.Navigate(new Uri("/Roster.xaml", UriKind.Relative));
+                //    NavigationService.Navigate(new Uri("/Views/RosterPivot.xaml", UriKind.Relative));
                 //}
 
             });
@@ -255,139 +273,3 @@ namespace PhoneApp1
 
 
 
-
-
-
-
-
-//namespace PhoneApp1
-//{
-//    public partial class MainPage : PhoneApplicationPage
-//    {
-
-//        Uri uri = new Uri("https://api.login.yahoo.com/oauth/v2/get_request_token");
-//        string response, authorizeUrl;
-
-
-//        static OAuthCredentials credentials = new OAuthCredentials
-//        {
-//            ConsumerKey = "dj0yJmk9QzhVcXVLdXNFclBxJmQ9WVdrOWVXMUNVMVV4TjJNbWNHbzlNVEV4TXpJME5UUTJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD1jNg--",
-//            ConsumerSecret = "0a7faca65d638eadcdc79a495dca99f719662c8e",
-//            SignatureMethod = OAuthSignatureMethod.HmacSha1,
-//            ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
-//            CallbackUrl = "http://www.google.com/",
-//            Version = "1.0"
-//        };
-
-
-//        RestClient client = new RestClient
-//        {
-//            Authority = "https://api.login.yahoo.com/oauth",
-//            Credentials = credentials
-//        };
-
-//        // Constructor
-//        public MainPage()
-//        {
-//            InitializeComponent();
-
-//            client.BeginRequest(
-//               new RestRequest
-//               {
-//                   Path = "/v2/get_request_token"
-//               },
-//               (request, response, userState) =>
-//               {
-//                   var queryParameters = ParseQueryString(response.Content);
-
-//                   credentials.Token = queryParameters["oauth_token"];
-//                   credentials.TokenSecret = queryParameters["oauth_token_secret"];
-//                   authorizeUrl = "https://api.login.yahoo.com/oauth/v2/request_auth?oauth_token=" + credentials.Token;
-
-
-//               });
-
-
-//        }
-
-//        public static Dictionary<string, string> ParseQueryString(string uri)
-//        {
-
-//            string substring = uri.Substring(((uri.LastIndexOf('?') == -1) ? 0 : uri.LastIndexOf('?') + 1));
-
-//            string[] pairs = substring.Split('&');
-
-//            Dictionary<string, string> output = new Dictionary<string, string>();
-
-//            foreach (string piece in pairs)
-//            {
-//                string[] pair = piece.Split('=');
-//                output.Add(pair[0], pair[1]);
-//            }
-//            return output;
-
-//        }
-
-//        private void Login_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
-//        {
-
-
-//            oAuthBrowser.Navigate(new Uri(authorizeUrl, UriKind.Absolute));
-//        }
-
-
-
-//        private void oAuthBrowser_Navigated_1(object sender, NavigationEventArgs e)
-//        {
-//            response = e.Uri.ToString();
-//            System.Diagnostics.Debug.WriteLine(e.Uri.ToString() + " debug url");
-//            string token = string.Empty;
-
-
-//            if (e.Content != null)
-//            {
-//                token = e.Content.ToString();
-//            }
-
-//            System.Diagnostics.Debug.WriteLine(token + " debug content");
-
-//            string baseurl = e.Uri.ToString();
-//            if (baseurl.IndexOf("?") > -1)
-//            {
-
-//                baseurl = baseurl.Substring(0, baseurl.IndexOf("?"));
-//            }
-
-//            System.Diagnostics.Debug.WriteLine(baseurl + " base url");
-
-//            if (baseurl.LastIndexOf("www.google.com") != -1)
-//            {
-//                var queryParameters = ParseQueryString(e.Uri.ToString());
-
-//                credentials.Verifier = queryParameters["oauth_verifier"];
-
-//            }
-//        }
-
-//        private void ApiCall_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-//        {
-
-
-//            client.BeginRequest(
-//               new RestRequest
-//               {
-//                   Path = "/v2/get_token"
-//               },
-//               (request, response, userState) =>
-//               {
-//                   var queryParameters = ParseQueryString(response.Content);
-
-//                   credentials.Token = queryParameters["oauth_token"];
-//                   credentials.TokenSecret = queryParameters["oauth_token_secret"];
-
-//               });
-//        }
-
-
-//    }
-//}

@@ -74,9 +74,13 @@ public class OAuthUtil
         //info.Signature = HttpUtility.UrlEncode(info.Signature);
         ////replace signature
 
+        info.Token = HttpUtility.UrlEncode(info.Token);
+    
+        var sessionParameter = new WebPair("oauth_session_handle", MainUtil.GetKeyValue<string>("SessionHandle"));
         var objOAuthWebQuery = new OAuthWebQuery(info, false);
         objOAuthWebQuery.HasElevatedPermissions = true;
         objOAuthWebQuery.SilverlightUserAgentHeader = "Hammock";
+        objOAuthWebQuery.Parameters.Add(sessionParameter);
         return objOAuthWebQuery;
     }
 

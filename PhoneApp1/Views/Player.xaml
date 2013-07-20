@@ -43,18 +43,18 @@
             </Grid.RowDefinitions>
             <Grid x:Name="HeadShotData" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="212"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-            <Image Grid.Row="0" Grid.Column="0" Source="{Binding SelectedPlayer.image_url}" Height="240" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" />
-                <StackPanel Grid.Column="1">                   
+            <Image Grid.Row="0" Grid.Column="0" Source="{Binding SelectedPlayer.image_url}" Height="240" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" />
+                <StackPanel Grid.Column="1" Margin="12,0,0,0">                   
                     <TextBlock Text="{Binding SelectedPlayer.editorial_team_full_name}"/>
                     
                 </StackPanel>
             </Grid>
 
 
-            <ListBox x:Name="PositionListBox" Grid.Row="2" SelectedItem="{Binding CurrentPosition.StringValue, Mode=TwoWay}" ItemsSource="{Binding EligiblePositions}" d:IsHidden="True">
+            <ListBox x:Name="PositionListBox" Grid.Row="2" SelectedItem="{Binding CurrentPosition, Mode=TwoWay}" ItemsSource="{Binding EligiblePositions}" d:IsHidden="True">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/> 

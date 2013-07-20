@@ -141,6 +141,8 @@ namespace PhoneApp1.Model
 
         private string nameField;
 
+        private string current_weekField;
+
         private byte is_owned_by_current_loginField;
 
         private string urlField;
@@ -199,6 +201,19 @@ namespace PhoneApp1.Model
                 this.nameField = value;
             }
         }
+
+        public string current_week
+        {
+            get
+            {
+                return this.current_weekField;
+            }
+            set
+            {
+                this.current_weekField = value;
+            }
+        }
+
 
         /// <remarks/>
         public byte is_owned_by_current_login

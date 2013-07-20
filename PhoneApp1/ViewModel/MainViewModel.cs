@@ -51,7 +51,7 @@ namespace PhoneApp1.ViewModel
 
         private Team _selectedTeam = null;
         public Player _selectedPlayer = new Player();
-        private string _currentPosition = string.Empty;
+        private StringObject _currentPosition = new StringObject();
         public const string RosterPropertyName = "Roster";
         public const string SelectedPlayerPropertyName = "SelectedPlayer";
         public const string EligiblePositionsPropertyName = "EligiblePositions";
@@ -285,9 +285,16 @@ namespace PhoneApp1.ViewModel
                     }
                     _eligiblePositions.Add(new StringObject { StringValue = "BN" });
                 }
-         //           _currentPosition = _selectedPlayer.selected_position.position.ToString();
+                if (_selectedPlayer.selected_position.position.ToString()!=null)
+                {
+                    if (_currentPosition == null)
+                    {
+                        _currentPosition = new StringObject();
+                    }
+                    _currentPosition.StringValue = _selectedPlayer.selected_position.position.ToString(); 
                 
-
+                }
+                   
             }
 
 
@@ -319,7 +326,7 @@ namespace PhoneApp1.ViewModel
         }
 
 
-        public string CurrentPosition
+        public StringObject CurrentPosition
         {
             get
             {
@@ -337,7 +344,10 @@ namespace PhoneApp1.ViewModel
                 RaisePropertyChanging(CurrentPositionPropertyName);
                 _currentPosition = value;
                 RaisePropertyChanged(CurrentPositionPropertyName);
-                _selectedPlayer.selected_position.position = _currentPosition;
+                if (_currentPosition!= null)
+                {
+                    _selectedPlayer.selected_position.position = _currentPosition.StringValue;                    
+                }
 
                      //           _selectedPlayer.selected_position = _eligiblePositions.se
             }
@@ -443,13 +453,13 @@ namespace PhoneApp1.ViewModel
                 writer.WriteStartElement("roster");
                 writer.WriteElementString("coverage_type", "week");
 
-                writer.WriteElementString("week", "17");
+                writer.WriteElementString("week", "1");
 
                 writer.WriteStartElement("players");
                 writer.WriteStartElement("player");
                 writer.WriteElementString("player_key", _selectedPlayer.player_key);
 
-                writer.WriteElementString("position", _currentPosition);
+                writer.WriteElementString("position", _currentPosition.StringValue);
 
                 writer.WriteEndElement();
                 writer.WriteEndElement();
@@ -467,7 +477,7 @@ namespace PhoneApp1.ViewModel
       
             client.ExecuteAsync(request, response =>
             {
-                MessageBox.Show(response.Content.ToString());
+                MessageBox.Show("Position Updated");
             });
 
         }

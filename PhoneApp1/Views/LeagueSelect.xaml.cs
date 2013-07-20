@@ -21,7 +21,7 @@ namespace PhoneApp1
     public partial class Page1 : PhoneApplicationPage
     {
         RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
-        string _teamKey = "273.l.216711.t.11";
+      //  string _teamKey = "273.l.216711.t.11";
 
         public Page1()
         {
@@ -38,6 +38,8 @@ namespace PhoneApp1
 
             appSettings["teamKey"] = tempTeamKey.team_key;
             appSettings["teamName"] = tempTeamKey.name;
+            appSettings["currentWeek"] = tempTeamKey.current_week;
+
 
             NavigationService.Navigate(new Uri("/Views/RosterPivot.xaml", UriKind.Relative));
 

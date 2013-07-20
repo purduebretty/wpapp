@@ -36,15 +36,16 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Name" Grid.Column="0" TextDecorations="Underline"/>
-                        <TextBlock Text="Pos" Grid.Column="1" TextDecorations="Underline"></TextBlock>
-                        <TextBlock Text="Team" Grid.Column="2" TextDecorations="Underline"/>
-                        <TextBlock Text="Pts" Grid.Column="3" TextDecorations="Underline"/>
+                        <TextBlock Text="Name" Grid.Column="1" TextDecorations="Underline"/>
+                        <TextBlock Text="Pos" Grid.Column="2" TextDecorations="Underline"></TextBlock>
+                        <TextBlock Text="Team" Grid.Column="3" TextDecorations="Underline"/>
+                        <TextBlock Text="Pts" Grid.Column="4" TextDecorations="Underline"/>
 
                     </Grid>
                     <ListBox x:Name="RosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
@@ -53,15 +54,17 @@
                             <DataTemplate>
                                     <Grid x:Name="RosterLayout">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="200"/>
                                             <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="60"/>
                                         </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding name.full}" Grid.Column="0"/>
-                                    <TextBlock Text="{Binding display_position}" Grid.Column="1" ></TextBlock>
-                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="2"/>
-                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="3"/>
+                                    <TextBlock Text="{Binding selected_position.position}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,6,6"/>
+                                    <TextBlock Text="{Binding name.full}" Grid.Column="1"/>
+                                    <TextBlock Text="{Binding display_position}" Grid.Column="2" ></TextBlock>
+                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="3"/>
+                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="4"/>
 
                                 </Grid>
 
