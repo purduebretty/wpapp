@@ -70,7 +70,7 @@
 
             </ListBox>
             
-            <Button Grid.Row="3" Content="test" Command="{Binding SaveCommand}" CommandParameter="true"/>
+            <!--<Button Grid.Row="3" Content="test" Tap="Button_Tap_1"/>-->
 
         </Grid>
     </Grid>

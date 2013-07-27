@@ -40,7 +40,7 @@ namespace PhoneApp1.ViewModel
     {
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+        ///// </summary>
         RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
        
 
@@ -49,7 +49,7 @@ namespace PhoneApp1.ViewModel
         ObservableCollection<StringObject> _eligiblePositions = new ObservableCollection<StringObject>();
         ObservableCollection<Team> teams = new ObservableCollection<Team>();
         ObservableCollection<Players> _players = new ObservableCollection<Players>();
-        ObservableCollection<Player> _roster = new ObservableCollection<Player>();
+        //ObservableCollection<Player> _roster = new ObservableCollection<Player>();
 
         private Team _selectedTeam = null;
         public Player _selectedPlayer = new Player();
@@ -180,64 +180,64 @@ namespace PhoneApp1.ViewModel
              }
         }
 
-        public ObservableCollection<Player> Roster
-        {
+       // public ObservableCollection<Player> Roster
+       // {
 
-            get
-            {
+       //     get
+       //     {
 
-                    string _teamKey = (string)appSettings["teamKey"];
-                    string _currentWeek = (string)appSettings["currentWeek"] ?? "1";
-                    string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
-                    var request = new RestRequest(String.Format(("team/{0}/roster/players/stats;type=week;week={1}"), _teamKey, _currentWeek), Method.GET); //changed 'roster' to 'stats;type=week;week=current'
+       //             string _teamKey = (string)appSettings["teamKey"];
+       //             string _currentWeek = (string)appSettings["currentWeek"] ?? "1";
+       //             string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+       //             var request = new RestRequest(String.Format(("team/{0}/roster/players/stats;type=week;week={1}"), _teamKey, _currentWeek), Method.GET); //changed 'roster' to 'stats;type=week;week=current'
 
-       //             var request = new RestRequest(String.Format(("player/{0}/stats;type=week;week={1}"), "314.p.25785", _currentWeek), Method.GET); //changed 'roster' to 'stats;type=week;week=current'
+       ////             var request = new RestRequest(String.Format(("player/{0}/stats;type=week;week={1}"), "314.p.25785", _currentWeek), Method.GET); //changed 'roster' to 'stats;type=week;week=current'
 
-                    if (_roster.Count == 0)
-                    {
+       //             if (_roster.Count == 0)
+       //             {
 
-                        client.ExecuteAsync(request, response =>
-                            {
+       //                 client.ExecuteAsync(request, response =>
+       //                     {
 
-                                if (_roster.Count == 0)
-                                {
-                                    XDocument doc = new XDocument();
-                                    XmlSerializer serializer = new XmlSerializer(typeof(fantasy_content));
-
-
-                                    MemoryStream playerxmlstream = new MemoryStream();
+       //                         if (_roster.Count == 0)
+       //                         {
+       //                             XDocument doc = new XDocument();
+       //                             XmlSerializer serializer = new XmlSerializer(typeof(fantasy_content));
 
 
-                                    var roster = (fantasy_content)serializer.Deserialize(new StringReader(response.Content.ToString()));
+       //                             MemoryStream playerxmlstream = new MemoryStream();
 
-                                    //     _players.Add(roster.team.roster.players);
 
-                                    for (int i = 0; i < (int)roster.team.roster.players.count; i++)
-                                    {
-                                        _roster.Add(roster.team.roster.players.player[i]);
-                                    }
-                                }
-                            });
+       //                             var roster = (fantasy_content)serializer.Deserialize(new StringReader(response.Content.ToString()));
+
+       //                             //     _players.Add(roster.team.roster.players);
+
+       //                             for (int i = 0; i < (int)roster.team.roster.players.count; i++)
+       //                             {
+       //                                 _roster.Add(roster.team.roster.players.player[i]);
+       //                             }
+       //                         }
+       //                     });
      
                         
-                        return _roster;
-                    }
-                    else { return _roster; }
-            }
-            set
-            {
-                if (_roster == value)
-                {
-                    return;
-                }
+       //                 return _roster;
+       //             }
+       //             else { return _roster; }
+       //     }
+       //     set
+       //     {
+       //         if (_roster == value)
+       //         {
+       //             return;
+       //         }
 
 
-                RaisePropertyChanging(RosterPropertyName);
-                _roster = value;
-                RaisePropertyChanged(RosterPropertyName);
+       //         RaisePropertyChanging(RosterPropertyName);
+       //         _roster = value;
+       //         RaisePropertyChanged(RosterPropertyName);
 
-            }
-        }
+       //     }
+       // }
 
         public Player SelectedPlayer
         {
@@ -420,71 +420,71 @@ namespace PhoneApp1.ViewModel
 
         }
         public void Save()
-        {
+        { }
 
-            string _teamKey = (string)appSettings["teamKey"];
-            string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+        //    string _teamKey = (string)appSettings["teamKey"];
+        //    string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
 
-            var request = new RestRequest(String.Format(("team/{0}/roster"), _teamKey), Method.PUT); //changed 'roster' to 'stats;type=week;week=current'
+        //    var request = new RestRequest(String.Format(("team/{0}/roster"), _teamKey), Method.PUT); //changed 'roster' to 'stats;type=week;week=current'
             
-            StringWriter sww = new StringWriter();
+        //    StringWriter sww = new StringWriter();
       
-            using (XmlWriter writer = XmlWriter.Create(sww))
-            {
+        //    using (XmlWriter writer = XmlWriter.Create(sww))
+        //    {
 
-                writer.WriteStartDocument();
-                writer.WriteStartElement("fantasy_content");
+        //        writer.WriteStartDocument();
+        //        writer.WriteStartElement("fantasy_content");
 
-                writer.WriteStartElement("roster");
-                writer.WriteElementString("coverage_type", "week");
+        //        writer.WriteStartElement("roster");
+        //        writer.WriteElementString("coverage_type", "week");
 
-                writer.WriteElementString("week", "1");
+        //        writer.WriteElementString("week", "1");
 
-                writer.WriteStartElement("players");
-                writer.WriteStartElement("player");
-                writer.WriteElementString("player_key", _selectedPlayer.player_key);
+        //        writer.WriteStartElement("players");
+        //        writer.WriteStartElement("player");
+        //        writer.WriteElementString("player_key", _selectedPlayer.player_key);
 
-                writer.WriteElementString("position", _currentPosition.StringValue);
+        //        writer.WriteElementString("position", _currentPosition.StringValue);
 
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteEndElement();
+        //        writer.WriteEndElement();
+        //        writer.WriteEndElement();
+        //        writer.WriteEndElement();
+        //        writer.WriteEndElement();
 
-                writer.WriteEndDocument();
-              writer.Flush();
+        //        writer.WriteEndDocument();
+        //      writer.Flush();
            
-            }
+        //    }
 
-           XDocument doc = XDocument.Parse(sww.ToString());
+        //   XDocument doc = XDocument.Parse(sww.ToString());
             
-          request.AddParameter("application/xml",doc , ParameterType.RequestBody);
+        //  request.AddParameter("application/xml",doc , ParameterType.RequestBody);
       
-            client.ExecuteAsync(request, response =>
-            {
-                if (response.Content.ToString().Contains("success"))
-                {
-                    MessageBox.Show("Position Updated");
-                    _selectedPlayer.selected_position.position = _currentPosition.StringValue;
+        //    client.ExecuteAsync(request, response =>
+        //    {
+        //        if (response.Content.ToString().Contains("success"))
+        //        {
+        //            MessageBox.Show("Position Updated");
+        //            _selectedPlayer.selected_position.position = _currentPosition.StringValue;
 
-                    for (int i = 0; i < _roster.Count; i++)
-                    {
-                        if (_roster[i].player_key == _selectedPlayer.player_key)
-                        {
-                            RaisePropertyChanging(RosterPropertyName);
-                            _roster[i].selected_position.position = _currentPosition.StringValue;
-                            RaisePropertyChanged(RosterPropertyName);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Position Already Taken");
-                }
-            });
+        //            for (int i = 0; i < _roster.Count; i++)
+        //            {
+        //                if (_roster[i].player_key == _selectedPlayer.player_key)
+        //                {
+        //                    RaisePropertyChanging(RosterPropertyName);
+        //                    _roster[i].selected_position.position = _currentPosition.StringValue;
+        //                    RaisePropertyChanged(RosterPropertyName);
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Position Already Taken");
+        //        }
+        //    });
 
             
-        }
+        //}
         public bool CanSave()
         {
             return true;

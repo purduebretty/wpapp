@@ -49,7 +49,7 @@
 
                     </Grid>
                     <ListBox x:Name="RosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
-                          SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster, Mode=TwoWay}" d:IsHidden="True">
+                        DataContext="{Binding Roster}"  ItemsSource="{Binding Roster}" d:IsHidden="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                     <Grid x:Name="RosterLayout">
@@ -98,7 +98,7 @@
                         <TextBlock Text="TDs" Grid.Column="3" TextDecorations="Underline"/>
                         <TextBlock Text="Fum" Grid.Column="4" TextDecorations="Underline"/>
                     </Grid>
-                    <ListBox x:Name="OffenseRosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                    <!--<ListBox x:Name="OffenseRosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
                           SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster}" d:IsHidden="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -121,7 +121,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
-                    </ListBox>
+                    </ListBox>-->
                 </Grid>
 
             </phone:PivotItem>
