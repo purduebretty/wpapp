@@ -25,6 +25,14 @@ namespace PhoneApp1.Views
         }
 
 
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
+            NavigationService.Navigate(new Uri("/Views/RosterPivot.xaml", UriKind.Relative));
+      
+        }
+
+
     
     }
 }

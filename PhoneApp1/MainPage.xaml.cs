@@ -28,11 +28,47 @@ namespace PhoneApp1
         string accessTokenSecret = string.Empty;
         string timestamp = string.Empty;
         string sessionHandle = string.Empty;
+
         
+
         // Constructor
         public MainPage()
         {
+            //moved from is user login
+            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+            int seconds = (int)t.TotalSeconds;
+            var timestampcheck = MainUtil.GetKeyValue<string>("Timestamp");
+            if (timestampcheck != null)
+            {
+                double duration = seconds - Convert.ToDouble(MainUtil.GetKeyValue<string>("Timestamp"));
+
+                if (duration > 3500)
+                {
+                    //  SignOut();
+
+                    var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
+                    RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
+
+                    RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
+                    if (isAlreadyLoggedIn())
+                    {
+                        userLoggedIn();
+                    }
+                }
+                else {
+                    if (isAlreadyLoggedIn())
+                    {
+                        userLoggedIn();
+                    }
+                }
+
+
+                //end
+            }
+
             InitializeComponent();
+
+
 
             if (isAlreadyLoggedIn())
             {
@@ -77,23 +113,6 @@ namespace PhoneApp1
 
         private void userLoggedIn()
         {
-            //moved from is user login
-            TimeSpan t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
-            int seconds = (int)t.TotalSeconds;
-            var timestampcheck = MainUtil.GetKeyValue<string>("Timestamp");
-            double duration = seconds - Convert.ToDouble(MainUtil.GetKeyValue<string>("Timestamp"));
-
-            if (duration > 3500)
-            {
-                //  SignOut();
-
-                var RefreshTokenQuery = OAuthUtil.RefreshAccessTokenQuery();
-                RefreshTokenQuery.RequestAsync(AppSettings.AccessTokenUri, null);
-
-                RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
-
-            }
-            //end
 
             Dispatcher.BeginInvoke(() =>
             {

@@ -20,14 +20,14 @@ namespace PhoneApp1
 {
     public partial class Page1 : PhoneApplicationPage
     {
-        RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
+//        RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
       //  string _teamKey = "273.l.216711.t.11";
 
         public Page1()
         {
             InitializeComponent();
 
-            client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
+  //          client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
 
         }
 
