@@ -21,6 +21,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Threading;
+using Microsoft.Phone.Controls;
 
 namespace PhoneApp1.ViewModel
 {
@@ -105,77 +106,87 @@ namespace PhoneApp1.ViewModel
 
                      client.ExecuteAsync(request, response =>
                          {
-                             XDocument doc = new XDocument();
-
-                             doc = XDocument.Parse(response.Content.ToString());
-
-                             string newjson = "";
-
-                             newjson = JsonConvert.SerializeXNode(doc);
-
-                             JObject o = JObject.Parse(newjson);
-
-
+                             
                              try
                              {
+                                 XDocument doc = new XDocument();
 
-                                 if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] == 1)
+                                 doc = XDocument.Parse(response.Content.ToString());
+
+
+
+                                 string newjson = "";
+
+                                 newjson = JsonConvert.SerializeXNode(doc);
+
+                                 JObject o = JObject.Parse(newjson);
+
+
+                                 try
                                  {
-                                     JObject _game = (JObject)o["fantasy_content"]["users"]["user"]["games"]["game"];
-                                     //                            games.Add(JsonConvert.DeserializeObject<Game>(_game.ToString()));
 
-                                     if ((int)_game["teams"]["@count"] == 1)
+                                     if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] == 1)
                                      {
-                                         teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"]));
-                                     }
-                                     if ((int)_game["teams"]["@count"] > 1)
-                                     {
-                                         JArray _teams = (JArray)_game["teams"]["team"];
+                                         JObject _game = (JObject)o["fantasy_content"]["users"]["user"]["games"]["game"];
+                                         //                            games.Add(JsonConvert.DeserializeObject<Game>(_game.ToString()));
 
-                                         for (int i = 0; i < _teams.Count; i++)
+                                         if ((int)_game["teams"]["@count"] == 1)
                                          {
-                                             teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
+                                             teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"]));
                                          }
-                                     }
-
-
-                                 };
-
-                                 if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] > 1)
-                                 {
-                                     JArray _games = (JArray)o["fantasy_content"]["users"]["user"]["games"]["game"];
-
-                                     for (int i = 0; i < o.Count; i++)
-                                     {
-                                         //                              games.Add(JsonConvert.DeserializeObject<Game>(_games[i].ToString()));
-
-                                         if ((int)_games[i]["teams"]["@count"] == 1)
+                                         if ((int)_game["teams"]["@count"] > 1)
                                          {
-                                             Team _team = JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"].ToString());
+                                             JArray _teams = (JArray)_game["teams"]["team"];
 
-                                             teams.Add(_team);
-                                         }
-                                         if ((int)_games[i]["teams"]["@count"] > 1)
-                                         {
-                                             JArray _teams = (JArray)_games[i]["teams"]["team"];
-
-                                             for (int j = 0; j < _teams.Count; i++)
+                                             for (int i = 0; i < _teams.Count; i++)
                                              {
-                                                 teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"][j].ToString()));
+                                                 teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
                                              }
                                          }
 
+
+                                     };
+
+                                     if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] > 1)
+                                     {
+                                         JArray _games = (JArray)o["fantasy_content"]["users"]["user"]["games"]["game"];
+
+                                         for (int i = 0; i < o.Count; i++)
+                                         {
+                                             //                              games.Add(JsonConvert.DeserializeObject<Game>(_games[i].ToString()));
+
+                                             if ((int)_games[i]["teams"]["@count"] == 1)
+                                             {
+                                                 Team _team = JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"].ToString());
+
+                                                 teams.Add(_team);
+                                             }
+                                             if ((int)_games[i]["teams"]["@count"] > 1)
+                                             {
+                                                 JArray _teams = (JArray)_games[i]["teams"]["team"];
+
+                                                 for (int j = 0; j < _teams.Count; i++)
+                                                 {
+                                                     teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"][j].ToString()));
+                                                 }
+                                             }
+
+                                         }
+
+
                                      }
-
-
+                                     SelectedTeam = teams[0];
                                  }
-                                 SelectedTeam = teams[0];
+                                 catch (Exception ex)
+                                 { MessageBox.Show(ex.ToString()); }
+
                              }
-                             catch (Exception ex)
-                             { MessageBox.Show(ex.ToString()); }
 
-
-                         });
+                             catch { Thread.Sleep(100);
+                             getLeagues();
+                             }
+                         }
+                 );
                  }
              }
         }
@@ -262,12 +273,12 @@ namespace PhoneApp1.ViewModel
 
                 if (_selectedPlayer != null && _selectedPlayer.eligible_positions != null)
                 {
-                    _eligiblePositions.Clear();
+                    EligiblePositions.Clear();
                     foreach (var item in _selectedPlayer.eligible_positions)
                     {
-                        _eligiblePositions.Add(new StringObject { StringValue = item });
+                        EligiblePositions.Add(new StringObject { StringValue = item });
                     }
-                    _eligiblePositions.Add(new StringObject { StringValue = "BN" });
+                    EligiblePositions.Add(new StringObject { StringValue = "BN" });
                 }
                 if (_selectedPlayer!= null && _selectedPlayer.selected_position.position.ToString()!=null)
                 {
@@ -365,6 +376,9 @@ namespace PhoneApp1.ViewModel
 
         public string TeamName { get { return (string)appSettings["teamName"]; } }
         public string TeamKey { get { return (string)appSettings["teamKey"]; } }
+
+
+
 
 
         public void UpdatePosition()

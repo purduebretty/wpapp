@@ -111,6 +111,9 @@
     <Compile Include="Views\LeagueSelect.xaml.cs">
       <DependentUpon>LeagueSelect.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PivotPage2.xaml.cs">
+      <DependentUpon>PivotPage2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LeagueSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PivotPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

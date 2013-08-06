@@ -49,7 +49,7 @@
 
                     </Grid>
                     <ListBox x:Name="RosterSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
-                          SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster, Mode=TwoWay}" d:IsHidden="True">
+                        SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding Roster, Mode=TwoWay}" d:IsHidden="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                     <Grid x:Name="RosterLayout">
@@ -60,11 +60,32 @@
                                             <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="60"/>
                                         </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding selected_position.position, Mode=TwoWay}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,6,6"/>
-                                    <TextBlock Text="{Binding name.full}" Grid.Column="1"/>
-                                    <TextBlock Text="{Binding display_position}" Grid.Column="2" ></TextBlock>
-                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="3"/>
-                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="4"/>
+                                    <TextBlock Text="{Binding selected_position.position, Mode=TwoWay}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,6,6">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
+                                        </TextBlock.Foreground>
+
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding name.full}" Grid.Column="1">
+                                        <!--<TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
+                                        </TextBlock.Foreground>-->
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding display_position}" Grid.Column="2" >
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="3">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding player_points.total}" Grid.Column="4">
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
+                                        </TextBlock.Foreground>
+                                        </TextBlock>
 
                                 </Grid>
 

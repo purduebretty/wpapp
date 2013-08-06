@@ -155,3 +155,4 @@ C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.dll
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.pdb
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\XapCacheFile.xml
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.csprojResolveAssemblyReference.cache
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\PivotPage2.g.cs
