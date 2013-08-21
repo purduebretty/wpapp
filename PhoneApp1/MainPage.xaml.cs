@@ -16,6 +16,7 @@ using Hammock;
 using Hammock.Web;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Threading;
 
 namespace PhoneApp1
 {
@@ -42,7 +43,7 @@ namespace PhoneApp1
             {
                 double duration = seconds - Convert.ToDouble(MainUtil.GetKeyValue<string>("Timestamp"));
 
-                if (duration > 3500)
+                if (duration > 1800)
                 {
                     //  SignOut();
 
@@ -52,12 +53,14 @@ namespace PhoneApp1
                     RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
                     if (isAlreadyLoggedIn())
                     {
+                        Thread.Sleep(100);
                         userLoggedIn();
                     }
                 }
                 else {
                     if (isAlreadyLoggedIn())
                     {
+                        Thread.Sleep(100);
                         userLoggedIn();
                     }
                 }
@@ -259,7 +262,7 @@ namespace PhoneApp1
             }
         }
 
-        void RefreshTokenQuery_QueryResponse(object sender, WebQueryResponseEventArgs e)
+       public void RefreshTokenQuery_QueryResponse(object sender, WebQueryResponseEventArgs e)
         {
             try
             {

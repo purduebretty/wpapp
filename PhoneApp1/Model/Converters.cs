@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PhoneApp1.Model
 {
@@ -31,8 +32,8 @@ namespace PhoneApp1.Model
             System.Globalization.CultureInfo culture)
         {
 
-            if (value.ToString() == "BN") { return SystemColors.GrayTextColor; }
-            else { return SystemColors.WindowTextColor; }
+            if (value.ToString() == "BN") { return Colors.Gray; }
+            else { return Colors.White; }
         }
 
         public object ConvertBack(object value, Type targetType,

@@ -21,6 +21,15 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Threading;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using Microsoft.Xna.Framework.Media;
+using System.Windows.Resources;
+using System.Threading.Tasks;
+using Windows.Storage;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace PhoneApp1.ViewModel
 {
@@ -50,6 +59,7 @@ namespace PhoneApp1.ViewModel
         ObservableCollection<Team> teams = new ObservableCollection<Team>();
         ObservableCollection<Players> _players = new ObservableCollection<Players>();
         ObservableCollection<Player> _roster = new ObservableCollection<Player>();
+        List<int> _playerImageList = new List<int>();
 
         private Team _selectedTeam = null;
         public Player _selectedPlayer = new Player();
@@ -58,10 +68,11 @@ namespace PhoneApp1.ViewModel
         public const string SelectedPlayerPropertyName = "SelectedPlayer";
         public const string EligiblePositionsPropertyName = "EligiblePositions";
         public const string CurrentPositionPropertyName = "CurrentPosition";
+        public int _playerImageNumber = 0;
         
 
         IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-
+        CycleTileData oCycleData = new CycleTileData();
 
         
 
@@ -80,7 +91,6 @@ namespace PhoneApp1.ViewModel
 
             }
         }
-
         public void getLeagues()
         {
              if (!appSettings.Contains("teamKey"))
@@ -105,81 +115,86 @@ namespace PhoneApp1.ViewModel
 
                      client.ExecuteAsync(request, response =>
                          {
-                             XDocument doc = new XDocument();
-
-                             doc = XDocument.Parse(response.Content.ToString());
-
-                             string newjson = "";
-
-                             newjson = JsonConvert.SerializeXNode(doc);
-
-                             JObject o = JObject.Parse(newjson);
-
-
+                             
                              try
                              {
+                                 XDocument doc = new XDocument();
 
-                                 if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] == 1)
+                                 doc = XDocument.Parse(response.Content.ToString());
+
+
+
+                                 string newjson = "";
+
+                                 newjson = JsonConvert.SerializeXNode(doc);
+
+                                 JObject o = JObject.Parse(newjson);
+
+
+                                 try
                                  {
-                                     JObject _game = (JObject)o["fantasy_content"]["users"]["user"]["games"]["game"];
-                                     //                            games.Add(JsonConvert.DeserializeObject<Game>(_game.ToString()));
 
-                                     if ((int)_game["teams"]["@count"] == 1)
+                                     if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] == 1)
                                      {
-                                         teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"]));
-                                     }
-                                     if ((int)_game["teams"]["@count"] > 1)
-                                     {
-                                         JArray _teams = (JArray)_game["teams"]["team"];
+                                         JObject _game = (JObject)o["fantasy_content"]["users"]["user"]["games"]["game"];
+                                         //                            games.Add(JsonConvert.DeserializeObject<Game>(_game.ToString()));
 
-                                         for (int i = 0; i < _teams.Count; i++)
+                                         if ((int)_game["teams"]["@count"] == 1)
                                          {
-                                             teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
+                                             teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"]));
                                          }
-                                     }
-
-
-                                 };
-
-                                 if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] > 1)
-                                 {
-                                     JArray _games = (JArray)o["fantasy_content"]["users"]["user"]["games"]["game"];
-
-                                     for (int i = 0; i < o.Count; i++)
-                                     {
-                                         //                              games.Add(JsonConvert.DeserializeObject<Game>(_games[i].ToString()));
-
-                                         if ((int)_games[i]["teams"]["@count"] == 1)
+                                         if ((int)_game["teams"]["@count"] > 1)
                                          {
-                                             Team _team = JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"].ToString());
+                                             JArray _teams = (JArray)_game["teams"]["team"];
 
-                                             teams.Add(_team);
-                                         }
-                                         if ((int)_games[i]["teams"]["@count"] > 1)
-                                         {
-                                             JArray _teams = (JArray)_games[i]["teams"]["team"];
-
-                                             for (int j = 0; j < _teams.Count; i++)
+                                             for (int i = 0; i < _teams.Count; i++)
                                              {
-                                                 teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"][j].ToString()));
+                                                 teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
                                              }
                                          }
 
+
+                                     };
+
+                                     if ((int)o["fantasy_content"]["users"]["user"]["games"]["@count"] > 1)
+                                     {
+                                         JArray _games = (JArray)o["fantasy_content"]["users"]["user"]["games"]["game"];
+
+                                         for (int i = 0; i < o.Count; i++)
+                                         {
+                                             //                              games.Add(JsonConvert.DeserializeObject<Game>(_games[i].ToString()));
+
+                                             if ((int)_games[i]["teams"]["@count"] == 1)
+                                             {
+                                                 Team _team = JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"].ToString());
+
+                                                 teams.Add(_team);
+                                             }
+                                             if ((int)_games[i]["teams"]["@count"] > 1)
+                                             {
+                                                 JArray _teams = (JArray)_games[i]["teams"]["team"];
+
+                                                 for (int j = 0; j < _teams.Count; j++)
+                                                 {
+                                                     teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"][j].ToString()));
+                                                 }
+                                             }
+                                         }
                                      }
-
-
+                                     SelectedTeam = teams[0];
                                  }
-                                 SelectedTeam = teams[0];
+                                 catch (Exception ex)
+                                 { MessageBox.Show(ex.ToString()); }
                              }
-                             catch (Exception ex)
-                             { MessageBox.Show(ex.ToString()); }
 
-
-                         });
+                             catch { Thread.Sleep(100);
+                             getLeagues();
+                             }
+                         }
+                 );
                  }
              }
         }
-
         public ObservableCollection<Player> Roster
         {
 
@@ -210,12 +225,61 @@ namespace PhoneApp1.ViewModel
 
                                     var roster = (fantasy_content)serializer.Deserialize(new StringReader(response.Content.ToString()));
 
-                                    //     _players.Add(roster.team.roster.players);
+
+                                    _playerImageList.Clear();
+                                    int _imageCount =0;
 
                                     for (int i = 0; i < (int)roster.team.roster.players.count; i++)
                                     {
                                         _roster.Add(roster.team.roster.players.player[i]);
+
+                                        if (!roster.team.roster.players.player[i].eligible_positions.Contains("DEF") || roster.team.roster.players.player[i].selected_position.position !="BN")
+                                        {
+                                            if (_playerImageList.Count < 9)
+                                            {
+                                                //Image headshot = new Image();
+
+                                                //BitmapImage bi = new BitmapImage();
+                                                
+
+                                                //bi.UriSource = new Uri(roster.team.roster.players.player[i].image_url);
+
+                                                //bi.ImageOpened += new EventHandler<RoutedEventArgs>(bi_ImageOpened);
+                                                //headshot.Source = bi;
+                                               
+                                                _playerImageList.Add(i);
+                                                _playerImageNumber = i;
+
+                                                WebClient wc = new WebClient();
+                                                wc.OpenReadCompleted += wc_OpenReadCompleted;
+                                                wc.OpenReadAsync(new Uri(roster.team.roster.players.player[i].image_url, UriKind.Absolute));
+                                                
+
+                                                //_rosterImages.Add(new Uri(roster.team.roster.players.player[i].image_url, UriKind.Absolute));
+                                                
+                                                
+                                                _imageCount++;
+                                               
+
+
+                                            }
+
+                                        }
                                     }
+                                    //if (!appSettings.Contains("rosterImages"))
+                                    //{
+                                    //    appSettings.Add("rosterImages", _rosterImages);
+                                    //}
+                                    //else
+                                    //{
+                                    //    appSettings["rosterImages"] = _rosterImages;
+                                    //}
+
+                                    
+
+                                    UpdateCycleData(_imageCount, _playerImageList);
+ 
+
                                 }
                             });
      
@@ -238,7 +302,6 @@ namespace PhoneApp1.ViewModel
 
             }
         }
-
         public Player SelectedPlayer
         {
             get
@@ -255,19 +318,23 @@ namespace PhoneApp1.ViewModel
                     return;
                 }
 
-                RaisePropertyChanging(SelectedPlayerPropertyName);
-                _selectedPlayer = value;
-                RaisePropertyChanged(SelectedPlayerPropertyName);
-
+                try
+                {
+                    RaisePropertyChanging(SelectedPlayerPropertyName);
+                    _selectedPlayer = value;
+                    RaisePropertyChanged(SelectedPlayerPropertyName);
+                }
+                catch { }
+                
 
                 if (_selectedPlayer != null && _selectedPlayer.eligible_positions != null)
                 {
-                    _eligiblePositions.Clear();
+                    EligiblePositions.Clear();
                     foreach (var item in _selectedPlayer.eligible_positions)
                     {
-                        _eligiblePositions.Add(new StringObject { StringValue = item });
+                        EligiblePositions.Add(new StringObject { StringValue = item });
                     }
-                    _eligiblePositions.Add(new StringObject { StringValue = "BN" });
+                    EligiblePositions.Add(new StringObject { StringValue = "BN" });
                 }
                 if (_selectedPlayer!= null && _selectedPlayer.selected_position.position.ToString()!=null)
                 {
@@ -283,7 +350,6 @@ namespace PhoneApp1.ViewModel
 
 
         }
-
         public ObservableCollection<StringObject> EligiblePositions
         {
             get
@@ -308,8 +374,6 @@ namespace PhoneApp1.ViewModel
 
 
         }
-
-
         public StringObject CurrentPosition
         {
             get
@@ -339,14 +403,10 @@ namespace PhoneApp1.ViewModel
 
 
         }
-
-
-
         public ObservableCollection<Team> TeamList
         {
             get { return teams; }
         }
-
         public Team SelectedTeam
         {
             get { return _selectedTeam; }
@@ -362,11 +422,8 @@ namespace PhoneApp1.ViewModel
             //    RaisePropertyChanged("SelectedTeam");
             }
         }
-
         public string TeamName { get { return (string)appSettings["teamName"]; } }
         public string TeamKey { get { return (string)appSettings["teamKey"]; } }
-
-
         public void UpdatePosition()
         {
             string _teamKey = (string)appSettings["teamKey"];
@@ -411,14 +468,31 @@ namespace PhoneApp1.ViewModel
                     {
                         return true;
                     });
-
-        //            _saveCommand = new RelayCommand(this.Save, this.CanSave);
-                }
-
-                return _saveCommand; //new (this.Save(), CanSave);
+             }
+            return _saveCommand;
             }
-
         }
+
+        RelayCommand _dropCommand = null;
+        public ICommand DropPlayer
+        {
+            get
+            {
+                if (_dropCommand == null)
+                {
+                    _dropCommand = new RelayCommand(() =>
+                    {
+                        this.AddDrop();
+                    },
+                    () =>
+                    {
+                        return true;
+                    });
+                }
+                return _dropCommand;
+            }
+        }
+
         public void Save()
         {
 
@@ -482,13 +556,132 @@ namespace PhoneApp1.ViewModel
                     MessageBox.Show("Position Already Taken");
                 }
             });
+}
 
-            
-        }
-        public bool CanSave()
+        public void AddDrop()
         {
-            return true;
+
+            string _teamKey = (string)appSettings["teamKey"];
+            string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+
+            var request = new RestRequest(String.Format(("league/{0}/transactions"), _leagueKey), Method.POST); //changed 'roster' to 'stats;type=week;week=current'
+
+            StringWriter sww = new StringWriter();
+
+            using (XmlWriter writer = XmlWriter.Create(sww))
+            {
+
+                writer.WriteStartDocument();
+                writer.WriteStartElement("fantasy_content");
+
+                writer.WriteStartElement("transaction");
+                writer.WriteElementString("type", "drop");
+
+                writer.WriteStartElement("player");
+
+                writer.WriteElementString("player_key", _selectedPlayer.player_key);
+                writer.WriteStartElement("transaction_data");
+                writer.WriteElementString("type", "drop");
+                writer.WriteElementString("source_team_key", _teamKey);
+
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+
+                writer.Flush();
+                }
+
+            XDocument doc = XDocument.Parse(sww.ToString());
+
+            request.AddParameter("application/xml", doc, ParameterType.RequestBody);
+
+            client.ExecuteAsync(request, response =>
+            {
+                if (response.Content.ToString().Contains("success"))
+                {
+                    MessageBox.Show("Player Dropped");
+             
+                    Player _playerToDrop = new Player();
+
+             foreach (var item in _roster)
+	{
+		 if (item.player_key == _selectedPlayer.player_key)
+         {
+             _playerToDrop = item;
+         }
+	}
+             RaisePropertyChanging(RosterPropertyName);
+             _roster.Remove(_playerToDrop);
+             RaisePropertyChanged(RosterPropertyName);
+                        
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Player Not Droppable");
+                }
+            });
+
+
         }
+
+
+        //public bool CanSave()
+        //{
+        //    return true;
+        //}
+
+        public void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+        {
+            string tempJpeg = string.Format("/Shared/ShellContent/Player{0}.jpg", _playerImageNumber);
+            var streamResourceInfo = new StreamResourceInfo(e.Result, null);
+
+            var userStoreForApplication = IsolatedStorageFile.GetUserStoreForApplication();
+            if (userStoreForApplication.FileExists(tempJpeg))
+            {
+                userStoreForApplication.DeleteFile(tempJpeg);
+            }
+
+            var isolatedStorageFileStream = userStoreForApplication.CreateFile(tempJpeg);
+
+
+            var bitmapImage = new BitmapImage { CreateOptions = BitmapCreateOptions.None };
+            bitmapImage.SetSource(streamResourceInfo.Stream);
+
+            var writeableBitmap = new WriteableBitmap(bitmapImage);
+            writeableBitmap.SaveJpeg(isolatedStorageFileStream, 336, 336, 0, 85);
+
+            //isolatedStorageFileStream.Close();
+            //isolatedStorageFileStream = userStoreForApplication.OpenFile(tempJpeg, FileMode.Open, FileAccess.Read);
+
+            //// Save the image to the camera roll or saved pictures album.
+            //var mediaLibrary = new MediaLibrary();
+
+            //// Save the image to the saved pictures album.
+            //mediaLibrary.SavePicture(string.Format("Player{0}.jpg", _playerImageNumber), isolatedStorageFileStream);
+
+            isolatedStorageFileStream.Close();
+        }
+
+
+
+        public void UpdateCycleData(int imageCount, List<int> _cycleImages)
+        {   
+            oCycleData.Count = _cycleImages.Count;
+
+            List<Uri> _cycleImageArray = new List<Uri>();
+
+            foreach (var item in _cycleImages)
+            {
+               _cycleImageArray.Add(new Uri(string.Format("/Shared/ShellContent/Player{0}.jpg", _playerImageNumber), UriKind.Relative));
+            }
+
+
+            oCycleData.CycleImages = _cycleImageArray.ToArray();
+
+        }
+
 
     }
 
