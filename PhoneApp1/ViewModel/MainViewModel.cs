@@ -22,6 +22,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Threading;
 using Microsoft.Phone.Controls;
+<<<<<<< HEAD
 using Microsoft.Phone.Shell;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -30,6 +31,8 @@ using System.Windows.Resources;
 using System.Threading.Tasks;
 using Windows.Storage;
 using System.Runtime.InteropServices.WindowsRuntime;
+=======
+>>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
 
 namespace PhoneApp1.ViewModel
 {
@@ -127,10 +130,17 @@ namespace PhoneApp1.ViewModel
                                  string newjson = "";
 
                                  newjson = JsonConvert.SerializeXNode(doc);
+<<<<<<< HEAD
 
                                  JObject o = JObject.Parse(newjson);
 
 
+=======
+
+                                 JObject o = JObject.Parse(newjson);
+
+
+>>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                                  try
                                  {
 
@@ -174,19 +184,36 @@ namespace PhoneApp1.ViewModel
                                              {
                                                  JArray _teams = (JArray)_games[i]["teams"]["team"];
 
+<<<<<<< HEAD
                                                  for (int j = 0; j < _teams.Count; j++)
+=======
+                                                 for (int j = 0; j < _teams.Count; i++)
+>>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                                                  {
                                                      teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"][j].ToString()));
                                                  }
                                              }
+<<<<<<< HEAD
                                          }
+=======
+
+                                         }
+
+
+>>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                                      }
                                      SelectedTeam = teams[0];
                                  }
                                  catch (Exception ex)
                                  { MessageBox.Show(ex.ToString()); }
+<<<<<<< HEAD
                              }
 
+=======
+
+                             }
+
+>>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                              catch { Thread.Sleep(100);
                              getLeagues();
                              }
@@ -424,6 +451,14 @@ namespace PhoneApp1.ViewModel
         }
         public string TeamName { get { return (string)appSettings["teamName"]; } }
         public string TeamKey { get { return (string)appSettings["teamKey"]; } }
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
         public void UpdatePosition()
         {
             string _teamKey = (string)appSettings["teamKey"];

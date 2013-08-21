@@ -25,10 +25,13 @@ namespace PhoneApp1.Views
 
             base.OnNavigatedTo(e);
         }
+<<<<<<< HEAD
 
         private void RosterPivotItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+=======
+>>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
     }
 }
