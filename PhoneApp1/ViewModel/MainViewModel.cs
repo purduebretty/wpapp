@@ -22,7 +22,6 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Threading;
 using Microsoft.Phone.Controls;
-<<<<<<< HEAD
 using Microsoft.Phone.Shell;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -31,8 +30,6 @@ using System.Windows.Resources;
 using System.Threading.Tasks;
 using Windows.Storage;
 using System.Runtime.InteropServices.WindowsRuntime;
-=======
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
 
 namespace PhoneApp1.ViewModel
 {
@@ -130,17 +127,10 @@ namespace PhoneApp1.ViewModel
                                  string newjson = "";
 
                                  newjson = JsonConvert.SerializeXNode(doc);
-<<<<<<< HEAD
 
                                  JObject o = JObject.Parse(newjson);
 
 
-=======
-
-                                 JObject o = JObject.Parse(newjson);
-
-
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                                  try
                                  {
 
@@ -184,36 +174,19 @@ namespace PhoneApp1.ViewModel
                                              {
                                                  JArray _teams = (JArray)_games[i]["teams"]["team"];
 
-<<<<<<< HEAD
                                                  for (int j = 0; j < _teams.Count; j++)
-=======
-                                                 for (int j = 0; j < _teams.Count; i++)
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                                                  {
                                                      teams.Add(JsonConvert.DeserializeObject<Team>(_games[i]["teams"]["team"][j].ToString()));
                                                  }
                                              }
-<<<<<<< HEAD
                                          }
-=======
-
-                                         }
-
-
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                                      }
                                      SelectedTeam = teams[0];
                                  }
                                  catch (Exception ex)
                                  { MessageBox.Show(ex.ToString()); }
-<<<<<<< HEAD
                              }
 
-=======
-
-                             }
-
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                              catch { Thread.Sleep(100);
                              getLeagues();
                              }
@@ -345,14 +318,10 @@ namespace PhoneApp1.ViewModel
                     return;
                 }
 
-                try
-                {
-                    RaisePropertyChanging(SelectedPlayerPropertyName);
-                    _selectedPlayer = value;
-                    RaisePropertyChanged(SelectedPlayerPropertyName);
-                }
-                catch { }
-                
+                RaisePropertyChanging(SelectedPlayerPropertyName);
+                _selectedPlayer = value;
+                RaisePropertyChanged(SelectedPlayerPropertyName);
+
 
                 if (_selectedPlayer != null && _selectedPlayer.eligible_positions != null)
                 {
@@ -451,14 +420,6 @@ namespace PhoneApp1.ViewModel
         }
         public string TeamName { get { return (string)appSettings["teamName"]; } }
         public string TeamKey { get { return (string)appSettings["teamKey"]; } }
-<<<<<<< HEAD
-=======
-
-
-
-
-
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
         public void UpdatePosition()
         {
             string _teamKey = (string)appSettings["teamKey"];
@@ -503,31 +464,14 @@ namespace PhoneApp1.ViewModel
                     {
                         return true;
                     });
-             }
-            return _saveCommand;
-            }
-        }
 
-        RelayCommand _dropCommand = null;
-        public ICommand DropPlayer
-        {
-            get
-            {
-                if (_dropCommand == null)
-                {
-                    _dropCommand = new RelayCommand(() =>
-                    {
-                        this.AddDrop();
-                    },
-                    () =>
-                    {
-                        return true;
-                    });
+        //            _saveCommand = new RelayCommand(this.Save, this.CanSave);
                 }
-                return _dropCommand;
-            }
-        }
 
+                return _saveCommand; //new (this.Save(), CanSave);
+            }
+
+        }
         public void Save()
         {
 
@@ -591,81 +535,13 @@ namespace PhoneApp1.ViewModel
                     MessageBox.Show("Position Already Taken");
                 }
             });
-}
 
-        public void AddDrop()
-        {
-
-            string _teamKey = (string)appSettings["teamKey"];
-            string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
-
-            var request = new RestRequest(String.Format(("league/{0}/transactions"), _leagueKey), Method.POST); //changed 'roster' to 'stats;type=week;week=current'
-
-            StringWriter sww = new StringWriter();
-
-            using (XmlWriter writer = XmlWriter.Create(sww))
-            {
-
-                writer.WriteStartDocument();
-                writer.WriteStartElement("fantasy_content");
-
-                writer.WriteStartElement("transaction");
-                writer.WriteElementString("type", "drop");
-
-                writer.WriteStartElement("player");
-
-                writer.WriteElementString("player_key", _selectedPlayer.player_key);
-                writer.WriteStartElement("transaction_data");
-                writer.WriteElementString("type", "drop");
-                writer.WriteElementString("source_team_key", _teamKey);
-
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-
-                writer.Flush();
-                }
-
-            XDocument doc = XDocument.Parse(sww.ToString());
-
-            request.AddParameter("application/xml", doc, ParameterType.RequestBody);
-
-            client.ExecuteAsync(request, response =>
-            {
-                if (response.Content.ToString().Contains("success"))
-                {
-                    MessageBox.Show("Player Dropped");
-             
-                    Player _playerToDrop = new Player();
-
-             foreach (var item in _roster)
-	{
-		 if (item.player_key == _selectedPlayer.player_key)
-         {
-             _playerToDrop = item;
-         }
-	}
-             RaisePropertyChanging(RosterPropertyName);
-             _roster.Remove(_playerToDrop);
-             RaisePropertyChanged(RosterPropertyName);
-                        
-                   
-                }
-                else
-                {
-                    MessageBox.Show("Player Not Droppable");
-                }
-            });
-
-
+            
         }
-
-
-        //public bool CanSave()
-        //{
-        //    return true;
-        //}
+        public bool CanSave()
+        {
+            return true;
+        }
 
         public void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {

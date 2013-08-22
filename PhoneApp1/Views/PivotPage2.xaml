@@ -16,7 +16,6 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-<<<<<<< HEAD
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -28,10 +27,6 @@
                      SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"
                      SelectionChanged="RosterPivotItem_SelectionChanged"
                      d:IsHidden="True">
-=======
-        <!--Pivot Control-->
-        <phone:Pivot x:Name="RosterPivotItem" Title="{Binding TeamName}"   ItemsSource="{Binding Roster, Mode=TwoWay}" d:IsHidden="True">
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
             <!--Pivot item one-->
             <phone:Pivot.HeaderTemplate>
                 <DataTemplate>
@@ -46,11 +41,7 @@
             </Grid.Resources>-->
                         <Grid.RowDefinitions>
                             <RowDefinition Height="240" />
-<<<<<<< HEAD
                             <RowDefinition Height="Auto" />
-=======
-                            <RowDefinition Height="*" />
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
@@ -62,7 +53,6 @@
                             <Image Grid.Row="0" Grid.Column="0" Source="{Binding image_url}" Height="240" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" />
                             <StackPanel Grid.Column="1" Margin="12,0,0,0">
                                 <TextBlock Text="{Binding editorial_team_full_name}"/>
-<<<<<<< HEAD
                                 <TextBlock Text="{Binding uniform_number, StringFormat='#{0}'}"/>
                                 <TextBlock Text="{Binding selected_position.position}"/>
                                 <StackPanel Orientation="Horizontal">
@@ -88,37 +78,10 @@
                             <TextBlock Text="Team" Grid.Column="3" TextDecorations="Underline"/>
                             <TextBlock Text="Pts" Grid.Column="4" TextDecorations="Underline"/>
                         </Grid>
-=======
-                                <TextBlock Text="{Binding uniform_number}"/>
-                                <TextBlock Text="{Binding selected_position.position}"/>
-
-
-
-                            </StackPanel>
-                        </Grid>
-
-
-                        <ListBox x:Name="PositionListBox" Grid.Row="2" ItemsSource="{Binding eligible_positions}" d:IsHidden="True">
-                            <!--<ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding StringValue}" Margin="20" FontSize="20" FontWeight="Bold" />
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>-->
-  
-                        </ListBox>
-
-                        <Button Grid.Row="3" Content="test" Command="{Binding SaveCommand}" CommandParameter="true"/>
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
 
                     </Grid>
                 </DataTemplate>
             </phone:Pivot.ItemTemplate>
-<<<<<<< HEAD
         </phone:Pivot>
 
         <ListBox x:Name="PositionListBox" Grid.Row="1" SelectedItem="{Binding CurrentPosition, Mode=TwoWay}" ItemsSource="{Binding EligiblePositions}" d:IsHidden="True">
@@ -133,16 +96,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Content="Update Position" Command="{Binding SaveCommand}" CommandParameter="true"/>
-            <Button Content="Drop Player" Command="{Binding DropPlayer}" CommandParameter="true"/>
-        </StackPanel>
-        
-=======
-
-
-        </phone:Pivot>
->>>>>>> a4e65948ebc2d413df54200afcdae96eaeb333b3
+        <Button Grid.Row="2" Content="test" Command="{Binding SaveCommand}" CommandParameter="true"/>
     </Grid>
     
 </phone:PhoneApplicationPage>
