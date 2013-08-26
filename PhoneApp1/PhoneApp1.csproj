@@ -108,11 +108,14 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AvailablePlayerPivot.xaml.cs">
+      <DependentUpon>AvailablePlayerPivot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LeagueSelect.xaml.cs">
       <DependentUpon>LeagueSelect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PivotPage2.xaml.cs">
-      <DependentUpon>PivotPage2.xaml</DependentUpon>
+    <Compile Include="Views\PlayerSelectPivot.xaml.cs">
+      <DependentUpon>PlayerSelectPivot.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
@@ -142,11 +145,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AvailablePlayerPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LeagueSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PivotPage2.xaml">
+    <Page Include="Views\PlayerSelectPivot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

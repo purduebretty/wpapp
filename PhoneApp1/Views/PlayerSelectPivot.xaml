@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="PhoneApp1.Views.PivotPage2"
+    x:Class="PhoneApp1.Views.PlayerSelectPivot"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -35,37 +35,13 @@
             </phone:Pivot.HeaderTemplate>
             <phone:Pivot.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                        <!--<Grid.Resources>
-                <local:MyCommand x:Key="mc"/>
-            </Grid.Resources>-->
+                    <Grid x:Name="ContentPanel" Margin="0,0,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="240" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Grid x:Name="HeadShotData" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Row="0" Grid.Column="0" Source="{Binding image_url}" Height="240" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" />
-                            <StackPanel Grid.Column="1" Margin="12,0,0,0">
-                                <TextBlock Text="{Binding editorial_team_full_name}"/>
-                                <TextBlock Text="{Binding uniform_number, StringFormat='#{0}'}"/>
-                                <TextBlock Text="{Binding selected_position.position}"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Points for Week "/>
-                                    <TextBlock Text="{Binding player_points.week}"/>
-                                    <TextBlock Text=": "/>
-                                    <TextBlock Text="{Binding player_points.total}"/>
-                                </StackPanel>
-                                <TextBlock Text="{Binding bye_weeks.week, StringFormat='Bye Week: {0}'}"/>
-
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="200"/>
@@ -78,8 +54,40 @@
                             <TextBlock Text="Team" Grid.Column="3" TextDecorations="Underline"/>
                             <TextBlock Text="Pts" Grid.Column="4" TextDecorations="Underline"/>
                         </Grid>
+                        <ListBox x:Name="PlayerSelectListBox"  HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                        SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" ItemsSource="{Binding AvailablePlayers, Mode=TwoWay}" d:IsHidden="True">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid x:Name="RosterLayout">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="60"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding selected_position.position, Mode=TwoWay}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,6,6">
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding name.full}" Grid.Column="1">
+                                        <!--<TextBlock.Foreground>
+                                            <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
+                                        </TextBlock.Foreground>-->
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding display_position}" Grid.Column="2" >
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="3">
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding player_points.total}" Grid.Column="4">
+                                        </TextBlock>
 
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
                     </Grid>
+
                 </DataTemplate>
             </phone:Pivot.ItemTemplate>
         </phone:Pivot>
@@ -96,7 +104,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="2" Content="test" Command="{Binding SaveCommand}" CommandParameter="true"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Update Position" Command="{Binding SaveCommand}" CommandParameter="true"/>
+            <Button Content="Drop Player" Command="{Binding DropPlayer}" CommandParameter="true"/>
+        </StackPanel>
     </Grid>
     
 </phone:PhoneApplicationPage>

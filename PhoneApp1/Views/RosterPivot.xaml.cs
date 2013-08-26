@@ -22,7 +22,12 @@ namespace PhoneApp1.Views
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri(String.Format("/Views/PivotPage2.xaml?goto={0}", RosterSelectListBox.SelectedIndex), UriKind.Relative));
+            NavigationService.Navigate(new Uri(String.Format("/Views/PlayerSelectPivot.xaml?goto={0}", RosterSelectListBox.SelectedIndex), UriKind.Relative));
+        }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/AvailablePlayerPivot.xaml", UriKind.Relative));
         }
 
 

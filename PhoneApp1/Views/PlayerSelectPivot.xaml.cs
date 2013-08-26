@@ -10,9 +10,9 @@ using Microsoft.Phone.Shell;
 
 namespace PhoneApp1.Views
 {
-    public partial class PivotPage2 : PhoneApplicationPage
+    public partial class PlayerSelectPivot : PhoneApplicationPage
     {
-        public PivotPage2()
+        public PlayerSelectPivot()
         {
             InitializeComponent();
         }

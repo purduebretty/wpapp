@@ -17,13 +17,17 @@ using PhoneApp1.Resources;
 using System.IO.IsolatedStorage;
 using Hammock.Web;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace PhoneApp1
 {
     public partial class Page1 : PhoneApplicationPage
     {
-//        RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
-      //  string _teamKey = "273.l.216711.t.11";
+        RestClient client = new RestClient("http://fantasysports.yahooapis.com/fantasy/v2/");
+
+        IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+
+
 
         public Page1()
         {
@@ -41,10 +45,7 @@ namespace PhoneApp1
 
                     RefreshTokenQuery.QueryResponse += new EventHandler<WebQueryResponseEventArgs>(RefreshTokenQuery_QueryResponse);
                 }
-
-
-
-                InitializeComponent();
+            InitializeComponent();
 
             }
         }
@@ -52,18 +53,14 @@ namespace PhoneApp1
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Team tempTeamKey = (Team)LeagueSelectListBox.SelectedItem;
-            IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
             appSettings["teamKey"] = tempTeamKey.team_key;
             appSettings["teamName"] = tempTeamKey.name;
             appSettings["currentWeek"] = tempTeamKey.current_week;
 
+            GetPositions();
 
             NavigationService.Navigate(new Uri("/Views/RosterPivot.xaml", UriKind.Relative));
-
-
-
-  
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,6 +89,49 @@ namespace PhoneApp1
                     MessageBox.Show(ex.Message);
                 });
             }
+        }
+
+        public void GetPositions()
+        {
+            string _teamKey = (string)appSettings["teamKey"];
+            string _currentWeek = (string)appSettings["currentWeek"] ?? "1";
+            string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+            ObservableCollection<StringObject> _positions = new ObservableCollection<StringObject>();
+
+            client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
+
+            var request = new RestRequest(string.Format("league/{0}/settings", _leagueKey), Method.GET);  ///users;use_login=1/games;game_keys=273,314/teams
+
+            client.ExecuteAsync(request, response =>
+            {
+                XDocument doc = new XDocument();
+                doc = XDocument.Parse(response.Content.ToString());
+                string newjson = "";
+                newjson = JsonConvert.SerializeXNode(doc);
+                JObject o = JObject.Parse(newjson);
+                
+                JArray _positionJArray = (JArray)o["fantasy_content"]["league"]["settings"]["roster_positions"]["roster_position"];
+             
+                for (int i = 0; i < _positionJArray.Count; i++)
+                {
+                    dynamic temp = JsonConvert.DeserializeObject<dynamic>(_positionJArray[i].ToString());
+
+                    if (temp.position != null && temp.position.ToString() != "BN")
+                    {
+                        _positions.Add(new StringObject { StringValue = temp.position.ToString() });
+                    }
+                }
+
+                if (!appSettings.Contains("positions"))
+                {
+                    appSettings.Add("positions", _positions);
+                }
+                else 
+                {
+                    appSettings["positions"] = _positions;
+                }
+
+            });
         }
 
 

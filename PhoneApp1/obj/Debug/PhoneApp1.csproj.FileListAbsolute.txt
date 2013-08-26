@@ -155,7 +155,6 @@ C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.dll
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.pdb
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\XapCacheFile.xml
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\PhoneApp1.csprojResolveAssemblyReference.cache
-C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\PivotPage2.g.cs
 C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196\PhoneApp1\Bin\Debug\Assets\ApplicationIcon.png
 C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png
 C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196\PhoneApp1\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png
@@ -199,3 +198,5 @@ C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpap
 C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196\PhoneApp1\obj\Debug\PhoneApp1.dll
 C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196\PhoneApp1\obj\Debug\PhoneApp1.pdb
 C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196\PhoneApp1\obj\Debug\XapCacheFile.xml
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\PlayerSelectPivot.g.cs
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\AvailablePlayerPivot.g.cs
