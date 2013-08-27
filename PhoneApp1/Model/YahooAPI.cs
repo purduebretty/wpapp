@@ -31,6 +31,13 @@ namespace PhoneApp1.Model
         public string position { get; set; }
     }
 
+    public class PercentOwned
+    {
+        public string coverage_type { get; set; }
+        public string week { get; set; }
+        public string delta { get; set; }
+    }
+
     public class JSONPlayer
     {
         public string player_key { get; set; }

@@ -37,17 +37,18 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" Margin="0,0,0,504" Grid.RowSpan="2">
+                            <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="60"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Name" Grid.Column="1" TextDecorations="Underline"/>
-                                <TextBlock Text="Pos" Grid.Column="2" TextDecorations="Underline"></TextBlock>
-                                <TextBlock Text="Team" Grid.Column="3" TextDecorations="Underline"/>
+                                <TextBlock Text="Name" Grid.Column="0" TextDecorations="Underline"/>
+                                <TextBlock Text="Team" Grid.Column="1" TextDecorations="Underline"></TextBlock>
+                                <TextBlock Text="Status" Grid.Column="2" TextDecorations="Underline"/>
+                                <TextBlock Text="Bye" Grid.Column="3" TextDecorations="Underline"/>
                                 <TextBlock Text="Pts" Grid.Column="4" TextDecorations="Underline"/>
 
                             </Grid>
@@ -58,19 +59,19 @@
                                     <DataTemplate>
                                         <Grid x:Name="RosterLayout">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60"/>
                                                 <ColumnDefinition Width="200"/>
                                                 <ColumnDefinition Width="60"/>
                                                 <ColumnDefinition Width="60"/>
                                                 <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="60"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding selected_position.position, Mode=TwoWay}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,6,6">
+                                            <TextBlock Text="{Binding name.full}" Grid.Column="0">
                                             </TextBlock>
-                                            <TextBlock Text="{Binding name.full}" Grid.Column="1">
+                                            <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="1">
                                             </TextBlock>
-                                            <TextBlock Text="{Binding display_position}" Grid.Column="2" >
+                                            <TextBlock Text="{Binding status}" Grid.Column="2" >
                                             </TextBlock>
-                                            <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="3">
+                                            <TextBlock Text="{Binding bye_weeks.week}" Grid.Column="3">
                                             </TextBlock>
                                             <TextBlock Text="{Binding player_points.total}" Grid.Column="4">
                                             </TextBlock>

@@ -429,7 +429,7 @@ namespace PhoneApp1.ViewModel
 
             client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
 
-            var request = new RestRequest(string.Format("league/{0}/players;status=A;position={1}", _leagueKey, playerPosition), Method.GET);  ///users;use_login=1/games;game_keys=273,314/teams
+            var request = new RestRequest(string.Format("league/{0}/players;status=A;position={1};out=percent_owned,ownership", _leagueKey, playerPosition), Method.GET);  ///users;use_login=1/games;game_keys=273,314/teams
 
             client.ExecuteAsync(request, response =>
             {
