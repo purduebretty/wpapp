@@ -57,6 +57,8 @@ namespace PhoneApp1.ViewModel
         ObservableCollection<Players> _players = new ObservableCollection<Players>();
         ObservableCollection<Player> _roster = new ObservableCollection<Player>();
         ObservableCollection<dynamic> _availablePlayers = new ObservableCollection<dynamic>();
+        ObservableCollection<StringObject> _positions = new ObservableCollection<StringObject>();
+
         
         List<int> _playerImageList = new List<int>();
 
@@ -349,17 +351,47 @@ namespace PhoneApp1.ViewModel
         {
             get 
             {
-                return (ObservableCollection<StringObject>)appSettings["positions"];
+                    string _teamKey = (string)appSettings["teamKey"];
+                    string _currentWeek = (string)appSettings["currentWeek"] ?? "1";
+                    string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
+                    
+                    client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
+
+                    var request = new RestRequest(string.Format("league/{0}/settings", _leagueKey), Method.GET); 
+
+                    client.ExecuteAsync(request, response =>
+                    {
+                        XDocument doc = new XDocument();
+                        doc = XDocument.Parse(response.Content.ToString());
+                        string newjson = "";
+                        newjson = JsonConvert.SerializeXNode(doc);
+                        JObject o = JObject.Parse(newjson);
+
+                        JArray _positionJArray = (JArray)o["fantasy_content"]["league"]["settings"]["roster_positions"]["roster_position"];
+
+                        for (int i = 0; i < _positionJArray.Count; i++)
+                        {
+                            dynamic temp = JsonConvert.DeserializeObject<dynamic>(_positionJArray[i].ToString());
+
+                            if (temp.position != null && temp.position.ToString() != "BN")
+                            {
+                                _positions.Add(new StringObject { StringValue = temp.position.ToString() });
+                            }
+                        }
+
+                    });
+                
+                return _positions;
             }
             set
             {
-                if (appSettings["positions"] == value)
+                if (_positions == value)
                 {
                     return;
                 }
 
                 RaisePropertyChanging("Positions");
-                appSettings["positions"] = value;
+                _positions = value;
                 RaisePropertyChanged("Positions");
             }
         }
@@ -370,12 +402,9 @@ namespace PhoneApp1.ViewModel
             {
                 if (_availablePlayers.Count == 0)
                 {
-                    string _position = "";
-
-                    foreach (var item in (ObservableCollection<StringObject>)appSettings["positions"])
+                    foreach (var item in _positions)
                     {
-                        _position = item.StringValue;
-                        GetAvailablePositions(_position);
+                        GetAvailablePositions(item.StringValue);
                     }
                 }
                 return _availablePlayers;
@@ -409,11 +438,14 @@ namespace PhoneApp1.ViewModel
                 string newjson = "";
                 newjson = JsonConvert.SerializeXNode(doc);
                 JObject o = JObject.Parse(newjson);
-                //              MessageBox.Show(newjson);
+            
                 JArray _positionJArray = (JArray)o["fantasy_content"]["league"]["players"]["player"];
+              //  dynamic _positionArray = _positionJArray.Select(jv => (dynamic)jv).ToArray();
+                
+
                 foreach (var arrayitem in _positionJArray)
                 {
-                    dynamic temp = JsonConvert.DeserializeObject<dynamic>(arrayitem.ToString());
+                    dynamic temp = JsonConvert.DeserializeObject<JSONPlayer>(arrayitem.ToString());
                     _availablePlayers.Add(temp);
                 }
             });

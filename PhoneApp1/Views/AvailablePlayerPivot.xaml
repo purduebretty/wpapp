@@ -22,13 +22,13 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Grid.Row="0" Background="Transparent">
         <!--Pivot Control-->
-            <phone:Pivot x:Name="AvailablePlayerPivotItem" Title="{Binding StringValue}" Grid.Row="0"  ItemsSource="{Binding Positions, Mode=TwoWay}" 
+            <phone:Pivot x:Name="AvailablePlayerPivotItem" Title="{Binding StringValue}" Grid.Row="0"  ItemsSource="{Binding Positions}" 
              d:IsHidden="True">
-                <!--<phone:Pivot.HeaderTemplate>
+                <phone:Pivot.HeaderTemplate>
                     <DataTemplate>
                         <ContentControl Content="{Binding StringValue}"/>
                     </DataTemplate>
-                </phone:Pivot.HeaderTemplate>-->
+                </phone:Pivot.HeaderTemplate>
           <phone:Pivot.ItemTemplate>
                     <DataTemplate>
                         <Grid x:Name="ContentPanel" Margin="0,0,0,0">
@@ -65,7 +65,6 @@
                                                 <ColumnDefinition Width="60"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="{Binding selected_position.position, Mode=TwoWay}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,6,6">
-
                                             </TextBlock>
                                             <TextBlock Text="{Binding name.full}" Grid.Column="1">
                                             </TextBlock>
@@ -75,7 +74,6 @@
                                             </TextBlock>
                                             <TextBlock Text="{Binding player_points.total}" Grid.Column="4">
                                             </TextBlock>
-
                                         </Grid>
 
                                     </DataTemplate>

@@ -122,14 +122,14 @@ namespace PhoneApp1
                     }
                 }
 
-                if (!appSettings.Contains("positions"))
-                {
-                    appSettings.Add("positions", _positions);
-                }
-                else 
-                {
-                    appSettings["positions"] = _positions;
-                }
+                //if (!appSettings.Contains("positions"))
+                //{
+                //    appSettings.Add("positions", _positions);
+                //}
+                //else 
+                //{
+                //    appSettings["positions"] = _positions;
+                //}
 
             });
         }
