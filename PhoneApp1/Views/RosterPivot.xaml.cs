@@ -27,7 +27,7 @@ namespace PhoneApp1.Views
 
         private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/AvailablePlayerPivot.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/AvailablePlayer.xaml", UriKind.Relative));
         }
 
 

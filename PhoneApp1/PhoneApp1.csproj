@@ -108,6 +108,15 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page3.xaml.cs">
+      <DependentUpon>Page3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddPlayerPivot.xaml.cs">
+      <DependentUpon>AddPlayerPivot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AvailablePlayer.xaml.cs">
+      <DependentUpon>AvailablePlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AvailablePlayerPivot.xaml.cs">
       <DependentUpon>AvailablePlayerPivot.xaml</DependentUpon>
     </Compile>
@@ -142,6 +151,18 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPlayerPivot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AvailablePlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:l="clr-namespace:PhoneApp1.Model"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -13,6 +14,10 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     DataContext="{Binding Main, Mode=OneTime, Source={StaticResource Locator}}"
     shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <l:PositionVisibility x:Name="ShowPosition"/>
+    </phone:PhoneApplicationPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -65,15 +70,15 @@
                                                 <ColumnDefinition Width="60"/>
                                                 <ColumnDefinition Width="60"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Text="{Binding name.full}" Grid.Column="0">
+                                            <TextBlock Text="{Binding name.full}" Grid.Column="0" Visibility="{Binding display_position, Converter={StaticResource ShowPosition} }">
                                             </TextBlock>
-                                            <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="1">
+                                            <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="1" Visibility="{Binding display_position, Converter={StaticResource ShowPosition} }">
                                             </TextBlock>
-                                            <TextBlock Text="{Binding status}" Grid.Column="2" >
+                                            <TextBlock Text="{Binding status}" Grid.Column="2" Visibility="{Binding display_position, Converter={StaticResource ShowPosition} }">
                                             </TextBlock>
-                                            <TextBlock Text="{Binding bye_weeks.week}" Grid.Column="3">
+                                            <TextBlock Text="{Binding bye_weeks.week}" Grid.Column="3" Visibility="{Binding display_position, Converter={StaticResource ShowPosition} }">
                                             </TextBlock>
-                                            <TextBlock Text="{Binding player_points.total}" Grid.Column="4">
+                                            <TextBlock Text="{Binding player_points.total}" Grid.Column="4" Visibility="{Binding display_position, Converter={StaticResource ShowPosition} }">
                                             </TextBlock>
                                         </Grid>
 
@@ -99,4 +104,16 @@
         </StackPanel>
         
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/questionmark.png" Text="player info" Click="ApplicationBarIconButton_Click"/>
+            </shell:ApplicationBar.MenuItems>
+            <!--<shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>

@@ -22,7 +22,25 @@ namespace PhoneApp1.Model
 
     public class JSONHeadshot
     {
-        public string url { get; set; }
+        public string hdurl
+        {
+            get
+            {
+                string _largeImage = this.url;
+
+                if (this.url != null && _largeImage.IndexOf("--/http") > 0)
+                {
+                    _largeImage = _largeImage.Substring(_largeImage.IndexOf("--/http") + 3);
+                }
+                return _largeImage;
+
+            }
+            set
+            {
+                hdurl = value;
+            }
+        }
+        public string url  {get; set;}
         public string size { get; set; }
     }
 

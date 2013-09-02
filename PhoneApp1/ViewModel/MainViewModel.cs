@@ -61,9 +61,12 @@ namespace PhoneApp1.ViewModel
 
         
         List<int> _playerImageList = new List<int>();
+        List<string> _positionAdded = new List<string>();
 
         private Team _selectedTeam = null;
         public Player _selectedPlayer = new Player();
+        public JSONPlayer _playerToAdd = new JSONPlayer();
+        public StringObject _newPlayerPosition = new StringObject() {StringValue = "QB" };
         private StringObject _currentPosition = new StringObject();
         public const string RosterPropertyName = "Roster";
         public const string SelectedPlayerPropertyName = "SelectedPlayer";
@@ -309,7 +312,7 @@ namespace PhoneApp1.ViewModel
 
             set
             {
-                if (_selectedPlayer == value)
+                if (_selectedPlayer == value)     
                 {
                     return;
                 }
@@ -349,38 +352,38 @@ namespace PhoneApp1.ViewModel
 
         public ObservableCollection<StringObject> Positions
         {
-            get 
+            get
             {
-                    string _teamKey = (string)appSettings["teamKey"];
-                    string _currentWeek = (string)appSettings["currentWeek"] ?? "1";
-                    string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
-                    
-                    client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
+                string _teamKey = (string)appSettings["teamKey"];
+                string _currentWeek = (string)appSettings["currentWeek"] ?? "1";
+                string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
 
-                    var request = new RestRequest(string.Format("league/{0}/settings", _leagueKey), Method.GET); 
+                client.Authenticator = OAuth1Authenticator.ForProtectedResource(AppSettings.consumerKey, AppSettings.consumerKeySecret, MainUtil.GetKeyValue<string>("AccessToken"), MainUtil.GetKeyValue<string>("AccessTokenSecret"));
 
-                    client.ExecuteAsync(request, response =>
+                var request = new RestRequest(string.Format("league/{0}/settings", _leagueKey), Method.GET);
+
+                client.ExecuteAsync(request, response =>
+                {
+                    XDocument doc = new XDocument();
+                    doc = XDocument.Parse(response.Content.ToString());
+                    string newjson = "";
+                    newjson = JsonConvert.SerializeXNode(doc);
+                    JObject o = JObject.Parse(newjson);
+
+                    JArray _positionJArray = (JArray)o["fantasy_content"]["league"]["settings"]["roster_positions"]["roster_position"];
+
+                    for (int i = 0; i < _positionJArray.Count; i++)
                     {
-                        XDocument doc = new XDocument();
-                        doc = XDocument.Parse(response.Content.ToString());
-                        string newjson = "";
-                        newjson = JsonConvert.SerializeXNode(doc);
-                        JObject o = JObject.Parse(newjson);
+                        dynamic temp = JsonConvert.DeserializeObject<dynamic>(_positionJArray[i].ToString());
 
-                        JArray _positionJArray = (JArray)o["fantasy_content"]["league"]["settings"]["roster_positions"]["roster_position"];
-
-                        for (int i = 0; i < _positionJArray.Count; i++)
+                        if (temp.position != null && temp.position.ToString() != "BN")
                         {
-                            dynamic temp = JsonConvert.DeserializeObject<dynamic>(_positionJArray[i].ToString());
-
-                            if (temp.position != null && temp.position.ToString() != "BN")
-                            {
-                                _positions.Add(new StringObject { StringValue = temp.position.ToString() });
-                            }
+                            _positions.Add(new StringObject { StringValue = temp.position.ToString() });
                         }
+                    }
 
-                    });
-                
+                });
+
                 return _positions;
             }
             set
@@ -393,20 +396,30 @@ namespace PhoneApp1.ViewModel
                 RaisePropertyChanging("Positions");
                 _positions = value;
                 RaisePropertyChanged("Positions");
+            }   
+        }
+
+        public StringObject NewPlayerPosition 
+        {
+            get
+            {
+                return _newPlayerPosition;
             }
+            set 
+            {
+                RaisePropertyChanged("NewPlayerPosition");
+                _newPlayerPosition = value;
+                GetAvailablePositions(_newPlayerPosition.StringValue);
+                RaisePropertyChanged("NewPlayerPosition");
+            }
+
         }
 
         public ObservableCollection<dynamic> AvailablePlayers
         {
             get
             {
-                if (_availablePlayers.Count == 0)
-                {
-                    foreach (var item in _positions)
-                    {
-                        GetAvailablePositions(item.StringValue);
-                    }
-                }
+                GetAvailablePositions(_newPlayerPosition.StringValue);
                 return _availablePlayers;
             }
             set
@@ -421,8 +434,20 @@ namespace PhoneApp1.ViewModel
             }
         }
 
+        public JSONPlayer PlayerToAdd
+        {
+            get { return _playerToAdd; }
+            set
+            {
+                RaisePropertyChanging("PlayerToAdd");
+                _playerToAdd = value;
+                RaisePropertyChanged("PlayerToAdd");
+            }
+
+        }
         public void GetAvailablePositions(string playerPosition)
         {
+            _availablePlayers.Clear();
             string _teamKey = (string)appSettings["teamKey"];
             string _currentWeek = (string)appSettings["currentWeek"] ?? "1";
             string _leagueKey = _teamKey.Substring(0, _teamKey.IndexOf(".t"));
@@ -449,8 +474,8 @@ namespace PhoneApp1.ViewModel
                     _availablePlayers.Add(temp);
                 }
             });
-            
-        }
+            }
+        
 
         public ObservableCollection<StringObject> EligiblePositions
         {

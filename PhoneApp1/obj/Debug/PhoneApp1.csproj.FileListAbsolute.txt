@@ -200,3 +200,6 @@ C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpap
 C:\Users\Brett\Downloads\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196 (2)\wpapp-721ac5fcfa2f953678b773979a73eef8e4266196\PhoneApp1\obj\Debug\XapCacheFile.xml
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\PlayerSelectPivot.g.cs
 C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\AvailablePlayerPivot.g.cs
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\AddPlayerPivot.g.cs
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Page3.g.cs
+C:\Users\Brett\Documents\GitHub\wpapp\PhoneApp1\obj\Debug\Views\AvailablePlayer.g.cs

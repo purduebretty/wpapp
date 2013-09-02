@@ -37,6 +37,12 @@ namespace PhoneApp1.Views
             InitializeComponent();
         }
 
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri(String.Format("/Views/AddPlayerPivot.xaml"), UriKind.Relative));
+        }
+
+
         //public List<string> GetPositions()
         //{
         //    string _teamKey = (string)appSettings["teamKey"];
