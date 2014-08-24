@@ -50,7 +50,7 @@
                 <TextBlock Text="Pts" Grid.Column="4" TextDecorations="Underline"/>
             </Grid>
             <ListBox x:Name="AvailablePlayerSelectListBox"   DataContext="{Binding Main, Mode=OneTime, Source={StaticResource Locator}}"
-                        HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="391" 
+                        HorizontalAlignment="Left" Height="587"  Grid.Row="1" VerticalAlignment="Top" Width="480" 
                         ItemsSource="{Binding AvailablePlayers}"  SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"  d:IsHidden="True">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

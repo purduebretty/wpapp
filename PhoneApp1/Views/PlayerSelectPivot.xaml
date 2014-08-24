@@ -33,7 +33,7 @@
             </phone:Pivot.HeaderTemplate>
             <phone:Pivot.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
                         <!--<Grid.Resources>
                 <local:MyCommand x:Key="mc"/>
             </Grid.Resources>-->
@@ -60,23 +60,19 @@
                                     <TextBlock Text="{Binding player_points.total}"/>
                                 </StackPanel>
                                 <TextBlock Text="{Binding bye_weeks.week, StringFormat='Bye Week: {0}'}"/>
-
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="60"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Name" Grid.Column="1" TextDecorations="Underline"/>
-                            <TextBlock Text="Pos" Grid.Column="2" TextDecorations="Underline"></TextBlock>
-                            <TextBlock Text="Team" Grid.Column="3" TextDecorations="Underline"/>
-                            <TextBlock Text="Pts" Grid.Column="4" TextDecorations="Underline"/>
+                            <TextBlock Text="Week" Grid.Column="1" TextDecorations="Underline"/>
+                            <TextBlock Text="Opp" Grid.Column="2" TextDecorations="Underline"/>
+                            <TextBlock Text="Pts" Grid.Column="3" TextDecorations="Underline"/>
                         </Grid>
-
                     </Grid>
                 </DataTemplate>
             </phone:Pivot.ItemTemplate>

@@ -42,8 +42,8 @@
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Name" Grid.Column="1" TextDecorations="Underline"/>
-                        <TextBlock Text="Pos" Grid.Column="2" TextDecorations="Underline"></TextBlock>
-                        <TextBlock Text="Team" Grid.Column="3" TextDecorations="Underline"/>
+                        <TextBlock Text="Opp" Grid.Column="2" TextDecorations="Underline"/>
+                        <TextBlock Text="Bye" Grid.Column="3" TextDecorations="Underline"/>
                         <TextBlock Text="Pts" Grid.Column="4" TextDecorations="Underline"/>
 
                     </Grid>
@@ -55,10 +55,10 @@
                                         <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition Width="200"/>
-                                            <ColumnDefinition Width="60"/>
-                                            <ColumnDefinition Width="60"/>
-                                            <ColumnDefinition Width="60"/>
-                                        </Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding selected_position.position, Mode=TwoWay}" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,6,6">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
@@ -75,7 +75,7 @@
                                             <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
                                         </TextBlock.Foreground>
                                     </TextBlock>
-                                    <TextBlock Text="{Binding editorial_team_abbr}" Grid.Column="3">
+                                    <TextBlock Text="{Binding bye_weeks.week}" Grid.Column="3">
                                         <TextBlock.Foreground>
                                             <SolidColorBrush Color="{Binding selected_position.position, Converter={StaticResource DisableBenchColor} }"/>
                                         </TextBlock.Foreground>

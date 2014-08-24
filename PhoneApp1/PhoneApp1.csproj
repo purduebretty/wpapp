@@ -97,7 +97,6 @@
     <Compile Include="Assets\AppBar\JsonSerializer.cs" />
     <Compile Include="Assets\RSSerializer.cs" />
     <Compile Include="MainUtil.cs" />
-    <Compile Include="Model\Commands.cs" />
     <Compile Include="Model\Converters.cs" />
     <Compile Include="Model\FantasyContent.cs" />
     <Compile Include="Model\Game.cs" />
@@ -233,6 +232,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\wp8\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.WP8">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\wp8\AutoMapper.WP8.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras.WP8">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.Extras.WP8.dll</HintPath>
     </Reference>
@@ -270,4 +275,5 @@
   </Target>
   -->
   <ProjectExtensions />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
 </Project>

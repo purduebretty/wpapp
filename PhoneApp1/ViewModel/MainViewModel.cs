@@ -110,7 +110,7 @@ namespace PhoneApp1.ViewModel
                 if (true)  //if ((string)appSettings["teamKey"] == "")
                 {
 
-                    var request = new RestRequest("users;use_login=1/games;game_keys=273,314/teams", Method.GET);  ///users;use_login=1/games;game_keys=273,314/teams
+                    var request = new RestRequest("users;use_login=1/games;game_keys=331/teams", Method.GET);  ///users;use_login=1/games;game_keys=273,314/teams
 
 
                     client.ExecuteAsync(request, response =>
@@ -138,7 +138,7 @@ namespace PhoneApp1.ViewModel
 
                                         if ((int)_game["teams"]["@count"] == 1)
                                         {
-                                            teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"]));
+                                            teams.Add(JsonConvert.DeserializeObject<Team>(_game["teams"]["team"].ToString()));
                                         }
                                         if ((int)_game["teams"]["@count"] > 1)
                                         {
@@ -146,7 +146,8 @@ namespace PhoneApp1.ViewModel
 
                                             for (int i = 0; i < _teams.Count; i++)
                                             {
-                                                teams.Add(JsonConvert.DeserializeObject<Team>((string)_game["teams"]["team"][i]));
+                                                teams.Add(JsonConvert.DeserializeObject<Team>(_game["teams"]["team"][i].ToString()));
+                                                
                                             }
                                         }
 
@@ -476,7 +477,6 @@ namespace PhoneApp1.ViewModel
             });
             }
         
-
         public ObservableCollection<StringObject> EligiblePositions
         {
             get
@@ -574,6 +574,8 @@ namespace PhoneApp1.ViewModel
 
             });
         }
+
+        #region commands
 
         RelayCommand _saveCommand = null;
         public ICommand SaveCommand
@@ -752,10 +754,8 @@ namespace PhoneApp1.ViewModel
 
 
         }
-        //public bool CanSave()
-        //{
-        //    return true;
-        //}
+
+        #endregion
 
         public void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
         {
